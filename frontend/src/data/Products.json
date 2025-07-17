@@ -1,0 +1,337 @@
+[
+  {
+    "name": "Korean Glass Serum",
+    "slug": "korean-glass-serum",
+    "image": "/images/1.png",
+    "backImage": "/images/3.png",
+    "hoverImage": "/images/2.png",
+    "price": 1499,
+    "originalPrice": 4599,
+    "discountPercent": 27,
+    "description": "A lightweight, fast-absorbing serum that gives you the coveted 'glass skin' look by deeply hydrating and strengthening your skin's barrier.",
+    "photo": "/images/49.png",
+    "specifications": {
+      "Form": "Serum",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "30ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Korean Silky Skin Brightening Mist (Australia Tea Tree)",
+    "slug": "silky-skin-mist-tea-tree",
+    "image": "/images/33.png",
+    "hoverImage": "/images/33.png",
+    "backImage": "/images/34.png",
+    "price": 799,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A refreshing facial mist infused with Australian tea tree extract to soothe irritation and brighten dull skin on the go.",
+    "photo": "/images/33.png",
+    "specifications": {
+      "Form": "Mist",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "100ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Acne Control Face Wash",
+    "slug": "acne-control-face-wash",
+    "image": "/images/31.png",
+    "hoverImage": "/images/31.png",
+    "backImage": "/images/32.png",
+    "price": 499,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A gentle cleansing foam formulated with salicylic acid and tea tree to clear breakouts without stripping moisture.",
+    "photo": "/images/31.png",
+    "specifications": {
+      "Form": "Face Wash",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "100ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Moisturiser",
+    "slug": "moisturiser",
+    "image": "/images/4.png",
+    "backImage": "/images/6.png",
+    "hoverImage": "/images/7.png",
+    "price": 599,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "An all-day hydrating cream that locks in moisture, improves skin elasticity, and leaves a soft, smooth finish.",
+    "photo": "/images/27.png",
+    "specifications": {
+      "Form": "Cream",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "50ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Radiant Glow Refreshing Mist",
+    "slug": "radiant-glow-refreshing-mist",
+    "image": "/images/29.png",
+    "hoverImage": "/images/30.png",
+    "backImage": "/images/30.png",
+    "price": 699,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A vitamin C-infused facial mist that revives tired skin, boosts radiance, and provides antioxidant protection.",
+    "photo": "/images/29.png",
+    "specifications": {
+      "Form": "Mist",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "100ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Collagen Laser Sunscreen 100",
+    "slug": "collagen-laser-sunscreen-100",
+    "image": "/images/46.png",
+    "backImage": "/images/47.png",
+    "hoverImage": "/images/47.png",
+    "price": 899,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "SPF 50 PA+++ sunscreen enriched with collagen peptides to protect against UV damage while firming the skin.",
+    "photo": "/images/46.png",
+    "specifications": {
+      "Form": "Sunscreen",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "50ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Real S Korean Glass BB Sunscreen",
+    "slug": "real-s-korean-glass-bb-sunscreen",
+    "image": "/images/48.png",
+    "price": 1099,
+    "description": "A multifunctional BB sunscreen that provides medium coverage, brightens complexion, and protects from UVA/UVB rays.",
+    "keyHighlights": [
+      {
+        "label": "BB Coverage",
+        "value": "Evens skin tone"
+      },
+      {
+        "label": "SPF 30 PA++",
+        "value": "Daily UV protection"
+      },
+      {
+        "label": "Radiant Finish",
+        "value": "Glass skin effect"
+      }
+    ],
+    "features": [
+      "Niacinamide brightening agent",
+      "Lightweight BB cream formula",
+      "Non-comedogenic",
+      "Dermatologist-approved"
+    ],
+    "gallery": [
+      "/images/49.png",
+      "/images/real-s-korean-glass-bb-sunscreen-2.jpg",
+      "/images/real-s-korean-glass-bb-sunscreen-3.jpg"
+    ]
+  },
+  {
+    "name": "Real S Korean Glass BB Sunscreen",
+    "slug": "real-s-korean-glass-bb-sunscreen",
+    "image": "/images/48.png",
+    "backImage": "/images/49.png",
+    "price": 1099,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A multifunctional BB sunscreen that provides medium coverage, brightens complexion, and protects from UVA/UVB rays.",
+    "photo": "/images/48.png",
+    "specifications": {
+      "Form": "BB Sunscreen",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "50ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Black Truffle Anti-Wrinkle Eye Cream",
+    "slug": "black-truffle-eye-cream",
+    "image": "/images/35.png",
+    "backImage": "/images/36.png",
+    "price": 1299,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A luxurious eye treatment infused with black truffle extract and peptides to reduce fine lines and dark circles.",
+    "photo": "/images/35.png",
+    "specifications": {
+      "Form": "Eye Cream",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "15ml",
+      "Application Area": "Under Eyes",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Leader Acne Removing Cream",
+    "slug": "leader-acne-removing-cream",
+    "image": "/images/37.png",
+    "backImage": "/images/38.png",
+    "price": 499,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A powerful spot treatment cream designed to target and reduce stubborn acne blemishes quickly.",
+    "photo": "/images/37.png",
+    "specifications": {
+      "Form": "Spot Cream",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "30ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Collagen Night Wrapping Mask",
+    "slug": "collagen-night-wrapping-mask",
+    "image": "/images/39.png",
+    "backImage": "/images/40.png",
+    "price": 799,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "An overnight mask enriched with collagen and ceramides to deeply hydrate and repair skin while you sleep.",
+    "photo": "/images/39.png",
+    "specifications": {
+      "Form": "Night Mask",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "50ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  },
+  {
+    "name": "Korean Silky Skin Brightening Mist (Rose Petals)",
+    "slug": "silky-skin-mist-rose-petals",
+    "image": "/images/25.png",
+    "backImage": "/images/26.png",
+    "price": 799,
+    "originalPrice": 2599,
+    "discountPercent": 27,
+    "description": "A gentle facial mist infused with rose petal extract to calm redness and impart a natural, rosy glow.",
+    "photo": "/images/25.png",
+    "specifications": {
+      "Form": "Mist",
+      "Skin Type": "All Skin Types",
+      "Shelf Life": "24 Months",
+      "Volume": "100ml",
+      "Application Area": "Face",
+      "Fragrance-Free": "Yes",
+      "Paraben-Free": "Yes"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    }
+  }
+]
