@@ -68,7 +68,7 @@ const Home = () => {
 
 
       {/* Features Section */}
-      <section className="py-6 bg-[#1f1a17]">
+      <section className="py-6 bg-[#FAF7F3]">
         <div className="max-w-[1300px] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
@@ -113,7 +113,7 @@ const Home = () => {
       <About />
 
       {/* Categories Section */}
-      <section className="py-4 bg-[#1d0c11] ">
+      <section className="py-4 bg-[#FAF7F3] ">
         <div className="container mx-auto px-6">
           <div className="text-center mb-2">
             <h2 className="text-3xl font-serif font-bold text-[#c09d64] mb-4">Our Collections</h2>
