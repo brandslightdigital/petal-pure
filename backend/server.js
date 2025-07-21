@@ -12,6 +12,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Basic route to confirm server is running
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
+
 // Routes
 const routes = require("./routes/index");
 app.use("/api", routes);

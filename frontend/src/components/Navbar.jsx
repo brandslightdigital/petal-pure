@@ -57,18 +57,18 @@ useEffect(() => {
 
           {/* Icons */}
           <div className="flex items-center space-x-3">
-            {/* Wishlist */}
+            {/* Wishlist
             <button className="relative p-2 rounded-full bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e5c79a] transition">
               <FaHeart size={16} />
               <span className="absolute -top-1 -right-1 text-[10px] bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full font-bold">
                 2
               </span>
-            </button>
+            </button> */}
 
             {/* User */}
-            <button className="p-2 rounded-full bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e5c79a] transition">
+            {/* <button className="p-2 rounded-full bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e5c79a] transition">
               <FaUser size={16} />
-            </button>
+            </button> */}
 
             {/* Cart */}
             <Link to="/cart" className="relative p-2 rounded-full bg-gradient-to-r from-[#D7B98E] to-[#E6A5A1] text-black hover:scale-105 transition shadow-lg">
