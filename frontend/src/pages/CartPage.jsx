@@ -14,7 +14,7 @@ const CartPage = () => {
     const fetchCart = async () => {
         try {
             const cartId = getCartId();
-            const res = await axios.get(`${import.meta.env.API_URL}/api/cart?cartId=${cartId}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart?cartId=${cartId}`);
             setCart(res.data.cart);
         } catch (err) {
             console.error("Error fetching cart", err);
@@ -27,7 +27,7 @@ const CartPage = () => {
         const cartId = getCartId();
         if (quantity <= 0) return;
         try {
-            await axios.put(`${import.meta.env.API_URL}/api/cart/update`, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/cart/update`, {
                 cartId,
                 slug,
                 quantity,
@@ -41,7 +41,7 @@ const CartPage = () => {
     const removeItem = async (slug) => {
         const cartId = getCartId();
         try {
-            await axios.delete(`${import.meta.env.API_URL}/api/cart/remove/${slug}?cartId=${cartId}`);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/cart/remove/${slug}?cartId=${cartId}`);
             fetchCart();
         } catch (err) {
             console.error("Remove error", err);

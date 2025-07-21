@@ -30,7 +30,7 @@ const CheckoutPage = () => {
   const fetchCart = async () => {
     try {
       const cartId = getCartId();
-      const res = await axios.get(`${import.meta.env.API_URL}/api/cart?cartId=${cartId}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart?cartId=${cartId}`);
       setCart(res.data.cart);
     } catch (err) {
       console.error("Error fetching cart", err);
@@ -90,7 +90,7 @@ const handlePlaceOrder = async () => {
     const { finalAmount } = calculateTotals();
     
     // Create order on your backend
-    const createOrderRes = await axios.post(`${import.meta.env.API_URL}/api/payment/create-order`, {
+    const createOrderRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/payment/create-order`, {
       amount: Math.round(finalAmount * 100), // Convert to paise and round to integer
     });
 
@@ -117,7 +117,7 @@ const handlePlaceOrder = async () => {
     handler: async function (response) {
         try {
           const verificationRes = await axios.post(
-            `${import.meta.env.API_URL}/api/payment/verify`,
+            `${import.meta.env.VITE_API_URL}/api/payment/verify`,
             {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,

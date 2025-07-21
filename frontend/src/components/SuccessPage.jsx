@@ -24,7 +24,7 @@ const SuccessPage = () => {
       try {
         if (orderId) {
           const response = await axios.get(
-            `${import.meta.env.API_URL}/api/payment/${orderId}`
+            `${import.meta.env.VITE_API_URL}/api/payment/${orderId}`
           );
           setOrder(response.data.order);
         }

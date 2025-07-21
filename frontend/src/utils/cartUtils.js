@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CART_API = `${import.meta.env.API_URL}/api/cart`; // Update if deployed
+const CART_API = `${import.meta.env.VITE_API_URL}/api/cart`; // Update if deployed
 
 export const getCartId = () => {
   let cartId = localStorage.getItem('cartId');

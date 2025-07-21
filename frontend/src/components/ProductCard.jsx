@@ -153,7 +153,7 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
               <button
                 onClick={handleAddToCart}
                 disabled={isAddingToCart}
-                className={`flex items-center justify-center gap-2 bg-[#d8b278] hover:bg-[#c9a66b] text-white py-2 px-3 rounded-md text-sm font-medium transition-all ${
+                className={`flex items-center justify-center gap-2 bg-[#5e412e] hover:bg-[#c9a66b] text-white py-2 px-3 rounded-md text-sm font-medium transition-all ${
                   isAddingToCart ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
@@ -163,7 +163,7 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
               <button
                 onClick={handleBuyNow}
                 disabled={isBuyingNow}
-                className={`flex items-center justify-center gap-2 border border-[#d8b278] text-[#d8b278] hover:bg-[#f6eadc] py-2 px-3 rounded-md text-sm font-medium transition-all ${
+                className={`flex items-center justify-center gap-2 border border-[#5e412e] text-[#5e412e] hover:bg-[#f6eadc] py-2 px-3 rounded-md text-sm font-medium transition-all ${
                   isBuyingNow ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
