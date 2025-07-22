@@ -2,9 +2,7 @@
 @import "tailwindcss";
 
 body {
-        font-family: "Montserrat", sans-serif !important;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
+        font-family: "Adobe Clean" !important;
+        font-weight: 500;
 
 }

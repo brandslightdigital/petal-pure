@@ -1,7 +1,8 @@
 [
   {
-    "name": "Korean Glass Serum",
+    "name": "Glass Skin Serum",
     "slug": "korean-glass-serum",
+    "category": "Serums",
     "image": "/images/1.png",
     "backImage": "/images/3.png",
     "hoverImage": "/images/2.png",
@@ -28,11 +29,12 @@
     }
   },
   {
-    "name": "Korean Silky Skin Brightening Mist (Australia Tea Tree)",
+    "name": "Tea Tree Face Mist",
     "slug": "silky-skin-mist-tea-tree",
     "image": "/images/13.png",
     "hoverImage": "/images/15.png",
     "backImage": "/images/14.png",
+    "category": "Face Mists",
     "price": 799,
     "originalPrice": 2599,
     "discountPercent": 27,
@@ -56,11 +58,12 @@
     }
   },
   {
-    "name": "Acne Control Face Wash",
+    "name": "Acne Control Cleanser",
     "slug": "acne-control-face-wash",
     "image": "/images/10.png",
     "hoverImage": "/images/12.png",
     "backImage": "/images/11.png",
+    "category": "Cleansers",
     "price": 499,
     "originalPrice": 2599,
     "discountPercent": 27,
@@ -84,9 +87,10 @@
     }
   },
   {
-    "name": "Moisturiser",
+    "name": "Hydrating Moisturizer",
     "slug": "moisturiser",
     "image": "/images/4.png",
+    "category": "Moisturizers",
     "backImage": "/images/6.png",
     "hoverImage": "/images/5.png",
     "price": 599,
@@ -112,9 +116,10 @@
     }
   },
   {
-    "name": "Radiant Glow Refreshing Mist",
+    "name": "Vitamin C Face Mist",
     "slug": "radiant-glow-refreshing-mist",
     "image": "/images/7.png",
+    "category": "Face Mists",
     "hoverImage": "/images/8.png",
     "backImage": "/images/9.png",
     "price": 699,
@@ -140,12 +145,13 @@
     }
   },
   {
-    "name": "Collagen Laser Sunscreen 100",
+    "name": "Collagen Sunscreen SPF50",
     "slug": "collagen-laser-sunscreen-100",
     "image": "/images/46.png",
     "backImage": "/images/47.png",
     "hoverImage": "/images/47.png",
     "price": 899,
+    "category": "Sunscreens",
     "originalPrice": 2599,
     "discountPercent": 27,
     "description": "SPF 50 PA+++ sunscreen enriched with collagen peptides to protect against UV damage while firming the skin.",
@@ -168,45 +174,14 @@
     }
   },
   {
-    "name": "Real S Korean Glass BB Sunscreen",
-    "slug": "real-s-korean-glass-bb-sunscreen",
-    "image": "/images/48.png",
-    "price": 1099,
-    "description": "A multifunctional BB sunscreen that provides medium coverage, brightens complexion, and protects from UVA/UVB rays.",
-    "keyHighlights": [
-      {
-        "label": "BB Coverage",
-        "value": "Evens skin tone"
-      },
-      {
-        "label": "SPF 30 PA++",
-        "value": "Daily UV protection"
-      },
-      {
-        "label": "Radiant Finish",
-        "value": "Glass skin effect"
-      }
-    ],
-    "features": [
-      "Niacinamide brightening agent",
-      "Lightweight BB cream formula",
-      "Non-comedogenic",
-      "Dermatologist-approved"
-    ],
-    "gallery": [
-      "/images/49.png",
-      "/images/real-s-korean-glass-bb-sunscreen-2.jpg",
-      "/images/real-s-korean-glass-bb-sunscreen-3.jpg"
-    ]
-  },
-  {
-    "name": "Real S Korean Glass BB Sunscreen",
+    "name": "BB Sunscreen SPF30",
     "slug": "real-s-korean-glass-bb-sunscreen",
     "image": "/images/48.png",
     "backImage": "/images/49.png",
     "price": 1099,
     "originalPrice": 2599,
     "discountPercent": 27,
+    "category": "Sunscreens",
     "description": "A multifunctional BB sunscreen that provides medium coverage, brightens complexion, and protects from UVA/UVB rays.",
     "photo": "/images/48.png",
     "specifications": {
@@ -227,13 +202,14 @@
     }
   },
   {
-    "name": "Black Truffle Anti-Wrinkle Eye Cream",
+    "name": "Anti-Wrinkle Eye Cream",
     "slug": "black-truffle-eye-cream",
     "image": "/images/35.png",
     "backImage": "/images/36.png",
     "price": 1299,
     "originalPrice": 2599,
     "discountPercent": 27,
+    "category": "Eye Care",
     "description": "A luxurious eye treatment infused with black truffle extract and peptides to reduce fine lines and dark circles.",
     "photo": "/images/35.png",
     "specifications": {
@@ -254,13 +230,14 @@
     }
   },
   {
-    "name": "Leader Acne Removing Cream",
+    "name": "Acne Spot Treatment",
     "slug": "leader-acne-removing-cream",
     "image": "/images/37.png",
     "backImage": "/images/38.png",
     "price": 499,
     "originalPrice": 2599,
     "discountPercent": 27,
+    "category": "Acne Treatments",
     "description": "A powerful spot treatment cream designed to target and reduce stubborn acne blemishes quickly.",
     "photo": "/images/37.png",
     "specifications": {
@@ -281,13 +258,14 @@
     }
   },
   {
-    "name": "Collagen Night Wrapping Mask",
+    "name": "Collagen Night Mask",
     "slug": "collagen-night-wrapping-mask",
     "image": "/images/39.png",
     "backImage": "/images/40.png",
     "price": 799,
     "originalPrice": 2599,
     "discountPercent": 27,
+    "category": "Face Masks",
     "description": "An overnight mask enriched with collagen and ceramides to deeply hydrate and repair skin while you sleep.",
     "photo": "/images/39.png",
     "specifications": {
@@ -308,13 +286,14 @@
     }
   },
   {
-    "name": "Korean Silky Skin Brightening Mist (Rose Petals)",
+    "name": "Rose Petal Face Mist",
     "slug": "silky-skin-mist-rose-petals",
     "image": "/images/25.png",
     "backImage": "/images/26.png",
     "price": 799,
     "originalPrice": 2599,
     "discountPercent": 27,
+    "category": "Face Mists",
     "description": "A gentle facial mist infused with rose petal extract to calm redness and impart a natural, rosy glow.",
     "photo": "/images/25.png",
     "specifications": {

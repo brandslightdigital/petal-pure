@@ -127,7 +127,7 @@ const Home = () => {
       <section className="py-6 bg-white">
         <div className="container mx-auto px-2">
           <div className="text-center mb-2">
-            <h2 className="text-3xl font-serif font-bold text-gray-800 mb-4">Best Sellers</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Best Sellers</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Our most loved products by customers worldwide
             </p>

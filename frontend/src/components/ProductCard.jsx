@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaArrowRight, FaEye, FaHeart } from 'react-icons/fa';
-import ProductQuickView from './ProductQuickView';
-import { addToCart } from '../utils/cartUtils';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaShoppingCart, FaArrowRight, FaEye, FaHeart } from "react-icons/fa";
+import ProductQuickView from "./ProductQuickView";
+import { addToCart } from "../utils/cartUtils";
 
 const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
   const navigate = useNavigate();
@@ -65,19 +65,24 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
     }
   };
 
+  const getDiscountPercent = (originalPrice, price) => {
+    if (!originalPrice || !price) return null;
+    const discount = ((originalPrice - price) / originalPrice) * 100;
+    return Math.round(discount);
+  };
   return (
     <>
       <div
         onClick={handleClick}
-        className="bg-[#fdf3e5] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-[#f0e2c8] cursor-pointer flex flex-col h-full group relative"
+        className=" overflow-hidden  transition-all duration-300 cursor-pointer flex flex-col h-full group relative"
       >
         {/* Wishlist Button */}
         <button
           onClick={handleWishlistToggle}
           className={`absolute top-2 left-2 p-2 rounded-full z-10 transition-colors ${
-            isInWishlist 
-              ? 'text-red-500 hover:text-red-600' 
-              : 'text-gray-400 hover:text-gray-600 bg-white/80 hover:bg-white'
+            isInWishlist
+              ? "text-red-500 hover:text-red-600"
+              : "text-gray-400 hover:text-gray-600 bg-white/80 hover:bg-white"
           }`}
         >
           <FaHeart size={16} />
@@ -94,7 +99,7 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
               loading="lazy" // Add lazy loading
             />
           </div>
-          
+
           {/* Hover Image - Fades in on hover */}
           {product.hoverImage && (
             <div className="absolute inset-0 transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-105">
@@ -128,18 +133,17 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
         </div>
 
         {/* Product Details */}
-        <div className="p-5 flex flex-col flex-grow">
+        <div className=" flex flex-col flex-grow mt-5">
+          <h3 className="text-base font-semibold text-[#3b2f2f] mb-2 ">
+            {product.name}
+          </h3>
           <span className="text-xs text-[#b8865b] uppercase tracking-wide mb-1">
             {product.category}
           </span>
 
-          <h3 className="text-lg font-semibold text-[#3b2f2f] mb-2 line-clamp-2 h-14">
-            {product.name}
-          </h3>
-
-          <div className="mt-auto">
+          <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xl font-bold text-[#d8b278]">
+              <span className="text-xl font-semibold text-[#000000]">
                 ₹{product.price.toLocaleString()}
               </span>
               {product.originalPrice && (
@@ -147,29 +151,33 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
                   ₹{product.originalPrice.toLocaleString()}
                 </span>
               )}
+              {/* Discount Badge */}
+              <span className="ml-2 px-2 py-1 text-xs font-bold text-white bg-red-600 rounded">
+                {getDiscountPercent(product.originalPrice, product.price)}% OFF
+              </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-1">
               <button
                 onClick={handleAddToCart}
                 disabled={isAddingToCart}
-                className={`flex items-center justify-center gap-2 bg-[#5e412e] hover:bg-[#c9a66b] text-white py-2 px-3 rounded-md text-sm font-medium transition-all ${
-                  isAddingToCart ? 'opacity-70 cursor-not-allowed' : ''
+                className={`flex items-center justify-center gap-2 border-1 border-[#000000] text-[#fdfdfd] bg-black hover:bg-transparent hover:text-black py-2 px-3  text-sm font-medium transition-all cursor-pointer ${
+                  isAddingToCart ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
                 <FaShoppingCart size={14} />
-                <span>{isAddingToCart ? 'Adding...' : 'Add'}</span>
+                <span>{isAddingToCart ? "Adding..." : "Add To Cart"}</span>
               </button>
-              <button
+              {/* <button
                 onClick={handleBuyNow}
                 disabled={isBuyingNow}
                 className={`flex items-center justify-center gap-2 border border-[#5e412e] text-[#5e412e] hover:bg-[#f6eadc] py-2 px-3 rounded-md text-sm font-medium transition-all ${
-                  isBuyingNow ? 'opacity-70 cursor-not-allowed' : ''
+                  isBuyingNow ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
-                <span>{isBuyingNow ? 'Processing...' : 'Buy'}</span>
+                <span>{isBuyingNow ? "Processing..." : "Buy"}</span>
                 <FaArrowRight size={12} />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -177,8 +185,8 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
 
       {/* Quick View Modal */}
       {showQuickView && (
-        <ProductQuickView 
-          product={product} 
+        <ProductQuickView
+          product={product}
           onClose={() => setShowQuickView(false)}
           onAddToCart={handleAddToCart}
           onBuyNow={handleBuyNow}
