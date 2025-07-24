@@ -19,6 +19,7 @@ import CancellationPolicy from './pages/CancellationPolicy'
 import ShippingPolicy from './pages/ShippingPolicy'
 import Disclaimer from './pages/Disclaimer'
 import TermsAndConditions from './pages/Terms&condition'
+import NewsBlogDetail from "./pages/NewsBlogDetail";
 
 
 export const App = () => {
@@ -35,6 +36,7 @@ export const App = () => {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/success" element={<SuccessPage />} />
+             <Route path="/news-blog/:slug" element={<NewsBlogDetail />} />
           <Route path="/cart" element={<CartPage/>} />
 
           {/* Term & condition , Privcy Policy, Refund Policy */}

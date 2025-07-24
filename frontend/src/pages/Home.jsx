@@ -7,6 +7,7 @@ import Slider from '../section/slider';
 import ProductCard from '../components/ProductCard';
 import Shop from '../components/Shop';
 import ProductCategories from '../section/Faqs'
+import NewsBlogs from '../components/NewsBlogs';
 
 const Home = () => {
   return (
@@ -141,7 +142,7 @@ const Home = () => {
       {/* Testimonials/Slider */}
       <Slider />
       <ProductCategories />
-
+<NewsBlogs/>
 
     </div>
   );

@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 // Routes
 const routes = require("./routes/index");
 app.use("/api", routes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB Connection
 mongoose

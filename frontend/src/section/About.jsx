@@ -34,14 +34,14 @@ const About = () => {
           </div>
           
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight  mb-2">
+          <h2 className="text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight  mb-2">
             Deeply Nourishing Face Serum
             <br />
             <span className="text-[#472d1c]">For Glowing & Healthy Skin</span>
           </h2>
           
           {/* Description */}
-          <p className="text-lg text-gray-700 max-w-2xl leading-relaxed  mb-0">
+          <p className="text-base md:text-lg text-gray-700 max-w-2xl leading-relaxed  mb-0">
             Fortified with botanical actives and powerful antioxidants, our face serum penetrates deeply to repair, hydrate, and protect—leaving your skin radiantly youthful.
           </p>
 
@@ -55,7 +55,7 @@ const About = () => {
             ].map((feat, i) => (
               <div 
                 key={i} 
-                className="group flex items-center space-x-4 p-3 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="group flex items-center space-x-4 p-1 md:p-3 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer"
                 onMouseEnter={() => setHoveredFeature(i)}
                 onMouseLeave={() => setHoveredFeature(null)}
               >
