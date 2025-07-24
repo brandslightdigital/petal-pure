@@ -8,6 +8,7 @@ import ProductCard from '../components/ProductCard';
 import Shop from '../components/Shop';
 import ProductCategories from '../section/Faqs'
 import NewsBlogs from '../components/NewsBlogs';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -31,12 +32,12 @@ const Home = () => {
                 Discover our premium skincare collection crafted with nature's finest ingredients for a glowing complexion.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-[#D7B98E] hover:bg-[#cdb184] text-white px-8 py-3 rounded-md font-medium transition duration-300 flex items-center shadow-md">
+                <Link to='/shop' className="bg-[#D7B98E] hover:bg-[#cdb184] text-white px-8 py-3 rounded-md font-medium transition duration-300 flex items-center shadow-md">
                   Shop Now <FaArrowRight className="ml-2" />
-                </button>
-                <button className="border border-[#5c4a3f] text-[#5c4a3f] hover:bg-[#5c4a3f] hover:text-white px-8 py-3 rounded-md font-medium transition duration-300">
+                </Link>
+                <Link to='/about' className="border border-[#5c4a3f] text-[#5c4a3f] hover:bg-[#5c4a3f] hover:text-white px-8 py-3 rounded-md font-medium transition duration-300">
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           </div>

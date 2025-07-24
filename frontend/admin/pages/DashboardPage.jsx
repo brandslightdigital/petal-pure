@@ -127,32 +127,7 @@ useEffect(() => {
           onClick: () => navigate("/admin/dashboard/setting"),
         },
       ],
-    },
-    {
-      key: "user-management",
-      icon: <Users size={20} />,
-      label: "User Management",
-      children: [
-        {
-          key: "/admin/dashboard/user-manager",
-          icon: <User size={18} />,
-          label: "User Manager",
-          onClick: () => navigate("/admin/dashboard/user-manager"),
-        },
-        {
-          key: "/admin/dashboard/Role-manager",
-          icon: <Shield size={18} />,
-          label: "Role Manager",
-          onClick: () => navigate("/admin/dashboard/Role-manager"),
-        },
-        {
-          key: "/admin/dashboard/Permission-manager",
-          icon: <Lock size={18} />,
-          label: "Permission Manager",
-          onClick: () => navigate("/admin/dashboard/Permission-manager"),
-        },
-      ],
-    },
+    }
   ];
 
   const userMenu = [

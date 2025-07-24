@@ -21,6 +21,7 @@ import Disclaimer from './pages/Disclaimer'
 import TermsAndConditions from './pages/Terms&condition'
 import NewsBlogDetail from "./pages/NewsBlogDetail";
 import NewsBlogsGrid from './components/NewsBlogPage';
+import About from './pages/About';
 
 
 export const App = () => {
@@ -39,6 +40,7 @@ export const App = () => {
           <Route path="/success" element={<SuccessPage />} />
              <Route path="/news-blog/:slug" element={<NewsBlogDetail />} />
           <Route path="/cart" element={<CartPage/>} />
+          <Route path="/about" element={<About/>}/>
           <Route path="/blogs" element={<NewsBlogsGrid/>}/>
 
           {/* Term & condition , Privcy Policy, Refund Policy */}
