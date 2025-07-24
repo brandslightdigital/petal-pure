@@ -7,6 +7,7 @@ import {
   FaCommentDots,
 } from 'react-icons/fa';
 import imagetwo from "../assets/images/aboutimage.png"
+import { Link } from 'react-router-dom';
 
 const About = () => {
   const [hoveredFeature, setHoveredFeature] = useState(null);
@@ -73,9 +74,9 @@ const About = () => {
 
           {/* Call to Action */}
           <div className="pt-2">
-            <button className="bg-gradient-to-r from-[#c09d64] to-[#1d0c11] text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <Link to="/about" className="bg-gradient-to-r from-[#c09d64] to-[#1d0c11] text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
               Learn More About Our Ingredients
-            </button>
+            </Link>
           </div>
         </div>
 
