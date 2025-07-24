@@ -37,8 +37,8 @@ const About = () => {
         {/* Founder Section */}
         <section className="flex flex-col md:flex-row items-center gap-8">
           <img
-            src={'/founder.jpg'} // replace with actual image path
-            alt="Founder"
+            src={'/images/founder.jpeg'} // replace with actual image path
+            alt="Bharti kapoor"
             className="w-52 h-52 object-cover rounded-full shadow-lg"
           />
           <div>
