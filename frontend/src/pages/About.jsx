@@ -11,7 +11,7 @@ const About = () => {
           className="object-cover w-full h-full"
         />
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <h1 className="text-white text-4xl md:text-5xl font-bold tracking-wide">
+          <h1 className="text-white text-4xl md:text-5xl font-semibold tracking-wide">
             About Petal Pure Oasis
           </h1>
         </div>
@@ -54,11 +54,11 @@ const About = () => {
 
         {/* Our Philosophy */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Our Philosophy</h2>
-          <p>
+          <h2 className="text-2xl font-bold">Our Philosophy</h2>
+          <p className="font-medium">
             We approach skincare with empathy — for your skin’s natural rhythm, for your busy lifestyle, and for the planet. Every ingredient is selected with care, every formula crafted with intention. Petal Pure Oasis bridges the ancient and the modern, creating products that feel luxurious and perform effectively.
           </p>
-          <p>
+          <p className="font-medium">
             Our AM/PM kits are curated to simplify your regimen while deeply nourishing your skin. Whether it’s the hydration of <strong>Komenuka Rice Serum</strong> or the rejuvenation of our <strong>Bio Collagen Mask</strong>, our range caters to real skin needs with real results.
           </p>
         </section>
@@ -69,13 +69,13 @@ const About = () => {
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <li className="bg-pink-100 p-6 rounded-lg shadow-sm">
               <h4 className="font-semibold text-lg">Clean Formulations</h4>
-              <p className="text-sm mt-2">
+              <p className="text-sm mt-2 font-medium">
                 No parabens, sulfates, or harsh chemicals — ever.
               </p>
             </li>
             <li className="bg-yellow-100 p-6 rounded-lg shadow-sm">
               <h4 className="font-semibold text-lg">Ethical Beauty</h4>
-              <p className="text-sm mt-2">
+              <p className="text-sm mt-2 font-medium   ">
                 Cruelty-free and eco-conscious from source to skin.
               </p>
             </li>
@@ -91,10 +91,10 @@ const About = () => {
         {/* Sustainability */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Our Commitment to Sustainability</h2>
-          <p>
+          <p className="font-medium">
             At Petal Pure Oasis, sustainability is more than a buzzword — it’s a responsibility. We use recyclable packaging, responsibly sourced ingredients, and low-impact production processes to ensure that our footprint remains gentle on the planet.
           </p>
-          <p>
+          <p className="font-medium">
             We are constantly innovating to create products that are as kind to the earth as they are to your skin.
           </p>
         </section>
@@ -102,10 +102,10 @@ const About = () => {
         {/* Global Reach */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Our Global Reach</h2>
-          <p>
+          <p className="font-medium">
             Trusted by skincare lovers in India and beyond, Petal Pure Oasis has grown into a global community. From beauty experts to first-time users, our products are embraced for their simplicity, integrity, and effectiveness.
           </p>
-          <p>
+          <p className="font-medium">
             We ship worldwide and are proud to support a growing network of clean beauty advocates, influencers, and skincare enthusiasts.
           </p>
         </section>
@@ -113,7 +113,7 @@ const About = () => {
         {/* CTA */}
         <section className="text-center mt-12">
           <h2 className="text-2xl font-semibold mb-4">Join the Petal Pure Ritual</h2>
-          <p className="mb-6">
+          <p className="mb-6 font-medium">
             Rediscover your skin’s natural harmony with our clean, conscious skincare.
           </p>
           <a
