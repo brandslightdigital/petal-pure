@@ -36,11 +36,7 @@ const Topbar = () => {
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-1">
             <FaInstagram className="text-gray-700" />
-            <span>100k Followers</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <FaFacebook className="text-gray-700" />
-            <span>300k Followers</span>
+            <span>1k Followers</span>
           </div>
         </div>
 
@@ -56,4 +52,3 @@ const Topbar = () => {
 };
 
 export default Topbar;
-// This component can be imported and used in your main App component or wherever needed.
