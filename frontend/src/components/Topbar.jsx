@@ -40,7 +40,7 @@ const Topbar = () => {
           </div>
         </div>
 
-        <div>Free Shipping All Over India</div>
+        <div>Free Shipping </div>
 
         <div className="flex items-center gap-1 cursor-pointer">
           <span>English</span>
