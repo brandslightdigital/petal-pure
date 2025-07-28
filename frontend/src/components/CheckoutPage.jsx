@@ -30,7 +30,9 @@ const CheckoutPage = () => {
   const fetchCart = async () => {
     try {
       const cartId = getCartId();
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart?cartId=${cartId}`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/cart?cartId=${cartId}`
+      );
       setCart(res.data.cart);
     } catch (err) {
       console.error("Error fetching cart", err);
@@ -39,7 +41,7 @@ const CheckoutPage = () => {
     }
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     if (location.state?.directBuy && location.state?.product) {
       // If the user clicked 'Buy Now', use the direct product info passed via state
       setCart({ items: [location.state.product] });
@@ -57,8 +59,15 @@ const CheckoutPage = () => {
   };
 
   const calculateTotals = () => {
-    if (!cart || !cart.items) return { originalPrice: 0, totalPrice: 0, discount: 0, gst: 0, finalAmount: 0 };
-    
+    if (!cart || !cart.items)
+      return {
+        originalPrice: 0,
+        totalPrice: 0,
+        discount: 0,
+        gst: 0,
+        finalAmount: 0,
+      };
+
     let totalPrice = 0;
     let originalPrice = 0;
 
@@ -74,76 +83,104 @@ const CheckoutPage = () => {
     return { originalPrice, totalPrice, discount, gst, finalAmount };
   };
 
-const handlePlaceOrder = async () => {
-  if (Object.values(formData).some((v) => v.trim() === "")) {
-    alert("Please fill all address fields");
-    return;
-  }
-
-  const res = await loadRazorpayScript();
-  if (!res) {
-    alert("Failed to load Razorpay. Try again later.");
-    return;
-  }
-
-  try {
-    const { finalAmount } = calculateTotals();
-    
-    // Create order on your backend
-    const createOrderRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/payment/create-order`, {
-      amount: Math.round(finalAmount * 100), // Convert to paise and round to integer
-    });
-
-    console.log("Create Order Response:", createOrderRes.data); // Debug log
-
-    // Verify the response structure - now checking for order.id instead of just id
-    if (!createOrderRes.data || !createOrderRes.data.order || !createOrderRes.data.order.id) {
-      console.error("Invalid response structure:", createOrderRes.data);
-      throw new Error(
-        createOrderRes.data?.message || 
-        "Invalid response from payment server. Missing order ID."
-      );
+  const handlePlaceOrder = async () => {
+    if (Object.values(formData).some((v) => v.trim() === "")) {
+      alert("Please fill all address fields");
+      return;
     }
 
-    const razorpayOrder = createOrderRes.data.order;
+    const res = await loadRazorpayScript();
+    if (!res) {
+      alert("Failed to load Razorpay. Try again later.");
+      return;
+    }
 
-    const options = {
-      key: "rzp_test_5VP8aQsRZd71M5", // Replace with your actual test/live key
-      amount: razorpayOrder.amount.toString(),
-      currency: razorpayOrder.currency || "INR",
-      name: "Petal Pure Oasis",
-      description: `Order for ${formData.fullName}`,
-      order_id: razorpayOrder.id,
-    handler: async function (response) {
-        try {
-          const verificationRes = await axios.post(
-            `${import.meta.env.VITE_API_URL}/api/payment/verify`,
-            {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              cart: { // Send proper cart structure
-                items: cart.items.map(item => ({
-                  slug: item.slug,
-                  name: item.name,
-                  price: item.price,
-                  quantity: item.quantity,
-                  image: item.image,
-                  originalPrice: item.originalPrice
-                }))
-              },
-              address: formData // Send complete address
+    try {
+      const { finalAmount } = calculateTotals();
+
+      // Create order on your backend
+      const createOrderRes = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/payment/create-order`,
+        {
+          amount: Math.round(finalAmount * 100), // Convert to paise and round to integer
+        }
+      );
+
+      console.log("Create Order Response:", createOrderRes.data); // Debug log
+
+      // Verify the response structure - now checking for order.id instead of just id
+      if (
+        !createOrderRes.data ||
+        !createOrderRes.data.order ||
+        !createOrderRes.data.order.id
+      ) {
+        console.error("Invalid response structure:", createOrderRes.data);
+        throw new Error(
+          createOrderRes.data?.message ||
+            "Invalid response from payment server. Missing order ID."
+        );
+      }
+
+      const razorpayOrder = createOrderRes.data.order;
+
+      const options = {
+        key: "rzp_test_5VP8aQsRZd71M5", // Replace with your actual test/live key
+        amount: razorpayOrder.amount.toString(),
+        currency: razorpayOrder.currency || "INR",
+        name: "Petal Pure Oasis",
+        description: `Order for ${formData.fullName}`,
+        order_id: razorpayOrder.id,
+        handler: async function (response) {
+          try {
+            const verificationRes = await axios.post(
+              `${import.meta.env.VITE_API_URL}/api/payment/verify`,
+              {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                cart: {
+                  // Send proper cart structure
+                  items: cart.items.map((item) => ({
+                    slug: item.slug,
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity,
+                    image: item.image,
+                    originalPrice: item.originalPrice,
+                  })),
+                },
+                address: formData, // Send complete address
+              }
+            );
+
+              if (verificationRes.data?.success) {
+            // Clear cart after successful payment
+            try {
+              await axios.post(`${import.meta.env.VITE_API_URL}/api/cart/clear`, { cartId });
+              console.log("Cart cleared successfully");
+              
+              // Clear local cart state
+              setCart({ items: [] });
+              
+              // Navigate to success page
+              navigate("/success", {
+                state: {
+                  orderId: verificationRes.data.orderId,
+                  amount: finalAmount,
+                  items: cart.items
+                },
+              });
+            } catch (clearError) {
+              console.error("Failed to clear cart:", clearError);
+              // Still proceed to success page even if cart clearing fails
+              navigate("/success", {
+                state: {
+                  orderId: verificationRes.data.orderId,
+                  amount: finalAmount,
+                  items: cart.items
+                },
+              });
             }
-          );
-
-          if (verificationRes.data?.success) {
-            navigate("/success", {
-              state: {
-                orderId: verificationRes.data.orderId,
-                amount: finalAmount,
-                items: cart.items // Pass items to success page
-              },
-            });
           }
         } catch (err) {
           console.error("Verification error:", err);
@@ -161,9 +198,11 @@ const handlePlaceOrder = async () => {
   }
 };
   if (loading) return <div className="text-center py-20">Loading...</div>;
-  if (!cart || cart.items.length === 0) return <div className="text-center py-20">Your cart is empty</div>;
+  if (!cart || cart.items.length === 0)
+    return <div className="text-center py-20">Your cart is empty</div>;
 
-  const { originalPrice, totalPrice, discount, gst, finalAmount } = calculateTotals();
+  const { originalPrice, totalPrice, discount, gst, finalAmount } =
+    calculateTotals();
 
   return (
     <div className="min-h-screen bg-[#fffefc] px-4 py-10 max-w-6xl mx-auto">
@@ -176,9 +215,17 @@ const handlePlaceOrder = async () => {
             {["fullName", "email", "phone", "pincode"].map((field, idx) => (
               <input
                 key={idx}
-                type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+                type={
+                  field === "email"
+                    ? "email"
+                    : field === "phone"
+                    ? "tel"
+                    : "text"
+                }
                 name={field}
-                placeholder={field.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase())}
+                placeholder={field
+                  .replace(/([A-Z])/g, " $1")
+                  .replace(/^./, (str) => str.toUpperCase())}
                 value={formData[field]}
                 onChange={handleInputChange}
                 className="w-full mb-4 px-4 py-3 border rounded"
@@ -234,12 +281,19 @@ const handlePlaceOrder = async () => {
           </div>
           <div className="flex justify-between text-sm">
             <span>GST (18%)</span>
-            <span>₹{gst.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            <span>
+              ₹{gst.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+            </span>
           </div>
           <hr />
           <div className="flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span>₹{finalAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            <span>
+              ₹
+              {finalAmount.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}
+            </span>
           </div>
           <button
             onClick={handlePlaceOrder}

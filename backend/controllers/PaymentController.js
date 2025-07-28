@@ -433,7 +433,13 @@ exports.verifyPayment = async (req, res) => {
       cart,
       address
     } = req.body;
-
+   // Add validation
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return res.status(400).json({
+        success: false,
+        message: 'Missing payment verification data'
+      });
+    }
     // 1. Verify signature
     const generatedSignature = crypto
       .createHmac('sha256', process.env.RAZORPAY_SECRET)
@@ -511,6 +517,39 @@ exports.verifyPayment = async (req, res) => {
     res.status(500).json({ 
       success: false,
       message: error.error?.description || 'Payment verification failed'
+    });
+  }
+};
+// Get all orders
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.json({ success: true, orders });
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Failed to fetch orders'
+    });
+  }
+};
+
+// Get single order
+exports.getOrder = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+    res.json({ success: true, order });
+  } catch (error) {
+    console.error('Error fetching order:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch order'
     });
   }
 };

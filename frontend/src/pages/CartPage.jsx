@@ -51,6 +51,14 @@ const CartPage = () => {
     useEffect(() => {
         fetchCart();
     }, []);
+      useEffect(() => {
+    const handleStorageChange = () => {
+      fetchCart(); // Refresh cart when storage changes
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
     if (loading) return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">

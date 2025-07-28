@@ -83,3 +83,20 @@ exports.removeCartItem = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+// controller: clearCart.js
+exports.clearCart = async (req, res) => {
+  const { cartId } = req.body;
+  if (!cartId) return res.status(400).json({ success: false, message: "cartId is required" });
+
+  try {
+    const cart = await Cart.findOne({ cartId });
+    if (!cart) return res.status(404).json({ success: false, message: "Cart not found" });
+
+    cart.items = []; // Empty cart
+    await cart.save();
+
+    res.status(200).json({ success: true, message: "Cart cleared" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};

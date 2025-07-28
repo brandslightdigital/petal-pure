@@ -2,9 +2,9 @@
 const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
-  orderId: String,
-  paymentId: String,
-  signature: String,
+  razorpay_order_id: String,  // Changed from 'orderId'
+  razorpay_payment_id: String, // Changed from 'paymentId'
+  razorpay_signature: String,  // Changed from 'signature'
   amount: Number,
   cartItems: Array,
   customer: {

@@ -95,7 +95,29 @@ useEffect(() => {
       }
     });
   }, []);
+  useEffect(() => {
+    const fetchAdminProfile = async () => {
+      try {
+        const token = localStorage.getItem("adminToken");
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/profile/profile`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
+        setAdminProfile(res.data);
+        localStorage.setItem(
+          "admin-permissions",
+          JSON.stringify(permissionNames)
+        );
+      } catch (err) {
+        console.error("Failed to load admin profile", err);
+      }
+    };
+
+    fetchAdminProfile();
+  }, []);
   const menuItems = [
     {
       key: "dashboard",
@@ -109,6 +131,12 @@ useEffect(() => {
       label: "Contact Enquiry",
       onClick: () => navigate("/admin/dashboard/contact-enquiry"),
     },
+    {
+    key: "/admin/dashboard/orders",
+    icon: <Package size={20} />,
+    label: "Orders",
+    onClick: () => navigate("/admin/dashboard/orders"),
+  },
     {
       key: "/admin/dashboard/blogs",
       icon: <Newspaper size={18} />,
@@ -263,10 +291,20 @@ useEffect(() => {
             <Dropdown menu={{ items: userMenu }} placement="bottomRight">
               <Space style={{ cursor: "pointer", padding: "8px 12px" }}>
                 <Avatar
-                  src={adminProfile.avatar ? `${import.meta.env.VITE_API_URL}${adminProfile.avatar}` : null}
-                  icon={!adminProfile.avatar && <UserOutlined />}
-                  size={32}
-                />
+                    src={
+                      adminProfile.avatar
+                        ? `${import.meta.env.VITE_API_URL}${adminProfile.avatar}`
+                        : null
+                    }
+                    style={{
+                      backgroundColor: token.colorPrimary,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    size={32}
+                    icon={!adminProfile.avatar && <UserOutlined />}
+                  /> 
                 <span>{adminProfile.name}</span>
                 <ChevronDown size={16} />
               </Space>
