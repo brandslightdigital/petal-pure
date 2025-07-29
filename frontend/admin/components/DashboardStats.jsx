@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, Row, Col, Spin, message, Typography, Select } from "antd";
 import {
   MessageCircle,
-  Compass,
-  Hotel,
-  MapPin,
+  ShoppingBag,
   PhoneCall,
   TrendingUp,
   Calendar
@@ -23,22 +21,17 @@ const DashboardStats = () => {
   const navigate = useNavigate();
   const { token } = useToken();
   const [loading, setLoading] = useState(true);
-  // ... (other state declarations remain the same)
-  const [timeRange, setTimeRange] = useState('all'); // Changed default to 'all
+  const [timeRange, setTimeRange] = useState('all');
   const [counts, setCounts] = useState({
     totalEnquiries: 0,
-    safariEnquiries: 0,
-    hotelEnquiries: 0,
-    tourEnquiries: 0,
+    orderEnquiries: 0,
     contactEnquiries: 0
   });
 
   // Colors for dashboard
   const colors = {
     total: "#5D34FF",
-    safari: "#00C48C", 
-    hotel: "#FF6D41",
-    tour: "#FFBD35",
+    order: "#00C48C", 
     contact: "#0080FF"
   };
 
@@ -49,7 +42,7 @@ const DashboardStats = () => {
 
   const filterEnquiriesByTimeRange = (enquiries, range) => {
     if (range === 'all') {
-      return enquiries; // Return all enquiries without filtering
+      return enquiries;
     }
 
     const now = moment();
@@ -69,7 +62,7 @@ const DashboardStats = () => {
         startDate = now.clone().subtract(1, 'year');
         break;
       default:
-        return enquiries; // Fallback to all enquiries
+        return enquiries;
     }
     
     return enquiries.filter(enquiry => {
@@ -77,22 +70,19 @@ const DashboardStats = () => {
       return enquiryDate.isBetween(startDate, now, null, '[]');
     });
   };
+
   // Group data by day for daily trends
   const groupByDay = (enquiries) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const grouped = {};
     
-    // Initialize empty counts for each day
     days.forEach(day => {
       grouped[day] = {
-        safari: 0,
-        hotel: 0,
-        tour: 0,
+        order: 0,
         contact: 0
       };
     });
     
-    // Count enquiries by day and type
     enquiries.forEach(enquiry => {
       const date = moment(enquiry.createdAt || enquiry.date || enquiry.timestamp);
       const day = days[date.day()];
@@ -116,9 +106,7 @@ const DashboardStats = () => {
     
     months.forEach(month => {
       grouped[month] = {
-        safari: 0,
-        hotel: 0,
-        tour: 0,
+        order: 0,
         contact: 0
       };
     });
@@ -143,9 +131,7 @@ const DashboardStats = () => {
   const calculateSourceDistribution = (enquiries) => {
     const sources = {
       'Homepage': 0,
-      'Safari Page': 0,
-      'Hotel Page': 0,
-      'Tour Page': 0,
+      'Order Page': 0,
       'Contact Page': 0
     };
     
@@ -165,9 +151,7 @@ const DashboardStats = () => {
         name,
         value,
         color: 
-          name === 'Safari Page' ? colors.safari :
-          name === 'Hotel Page' ? colors.hotel :
-          name === 'Tour Page' ? colors.tour :
+          name === 'Order Page' ? colors.order :
           name === 'Contact Page' ? colors.contact :
           colors.total
       }));
@@ -178,30 +162,22 @@ const DashboardStats = () => {
       try {
         setLoading(true);
         
-        // Fetch all enquiry data
+        // Fetch all enquiry data - modify these endpoints to match your API
         const [
-          safariRes,
-          hotelRes,
-          tourRes,
+          orderRes,
           contactRes
         ] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_URL}/api/safarienquiry/`),
-          axios.get(`${import.meta.env.VITE_API_URL}/api/hotelenquiry`),
-          axios.get(`${import.meta.env.VITE_API_URL}/api/tour/tour-enquiries`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/payment/orders`),
           axios.get(`${import.meta.env.VITE_API_URL}/api/contactenquiry/`)
         ]);
 
         // Process raw data with type information
-        const safariEnquiries = (safariRes.data?.enquiries || safariRes.data || []).map(e => ({ ...e, type: 'safari' }));
-        const hotelEnquiries = (hotelRes.data || []).map(e => ({ ...e, type: 'hotel' }));
-        const tourEnquiries = (tourRes.data?.enquiries || tourRes.data || []).map(e => ({ ...e, type: 'tour' }));
+        const orderEnquiries = (orderRes.data?.enquiries || orderRes.data || []).map(e => ({ ...e, type: 'order' }));
         const contactEnquiries = (contactRes.data?.contacts || contactRes.data || []).map(e => ({ ...e, type: 'contact' }));
 
         // Combine all enquiries
         const allEnquiries = [
-          ...safariEnquiries,
-          ...hotelEnquiries,
-          ...tourEnquiries,
+          ...orderEnquiries,
           ...contactEnquiries
         ];
 
@@ -211,15 +187,13 @@ const DashboardStats = () => {
         // Set counts
         setCounts({
           totalEnquiries: filteredEnquiries.length,
-          safariEnquiries: safariEnquiries.length,
-          hotelEnquiries: hotelEnquiries.length,
-          tourEnquiries: tourEnquiries.length,
+          orderEnquiries: orderEnquiries.length,
           contactEnquiries: contactEnquiries.length
         });
 
         // Prepare chart data
         setDailyData(groupByDay(filteredEnquiries));
-        setMonthlyData(groupByMonth(allEnquiries)); // Use all data for monthly view
+        setMonthlyData(groupByMonth(allEnquiries));
         setSourcesData(calculateSourceDistribution(filteredEnquiries));
 
       } catch (error) {
@@ -232,6 +206,7 @@ const DashboardStats = () => {
 
     fetchData();
   }, [timeRange]);
+
   const renderStatCard = (title, count, icon, color, path) => {
     return (
       <Card
@@ -344,7 +319,7 @@ const DashboardStats = () => {
             bordered={false}
             dropdownStyle={{ borderRadius: "12px" }}
           >
-            <Option value="all">All Enquiries</Option> {/* Added new option */}
+            <Option value="all">All Enquiries</Option>
             <Option value="today">Today</Option>
             <Option value="week">This Week</Option>
             <Option value="month">This Month</Option>
@@ -355,7 +330,7 @@ const DashboardStats = () => {
 
       {/* Stats Cards */}
       <Row gutter={[24, 24]} style={{ marginBottom: 32 }}>
-        <Col xs={24} sm={12} md={12} lg={12} xl={8}>
+        <Col xs={24} sm={12} md={12} lg={12} xl={12}>
           {renderStatCard(
             "Total Enquiries", 
             counts.totalEnquiries, 
@@ -364,34 +339,16 @@ const DashboardStats = () => {
             "/admin/dashboard/enquiries"
           )}
         </Col>
-        <Col xs={24} sm={12} md={12} lg={12} xl={8}>
-          {renderStatCard(
-            "Safari Enquiries", 
-            counts.safariEnquiries, 
-            <Compass />, 
-            colors.safari, 
-            "/admin/dashboard/safari-enquiry"
-          )}
-        </Col>
-        <Col xs={24} sm={12} md={12} lg={12} xl={8}>
-          {renderStatCard(
-            "Hotel Enquiries", 
-            counts.hotelEnquiries, 
-            <Hotel />, 
-            colors.hotel, 
-            "/admin/dashboard/hotel-enquiry"
-          )}
-        </Col>
         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
           {renderStatCard(
-            "Tour Enquiries", 
-            counts.tourEnquiries, 
-            <MapPin />, 
-            colors.tour, 
-            "/admin/dashboard/tour-enquiry"
+            "Order Recieved", 
+            counts.orderEnquiries, 
+            <ShoppingBag />, 
+            colors.order, 
+            "/admin/dashboard/orders"
           )}
         </Col>
-        <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24}>
           {renderStatCard(
             "Contact Enquiries", 
             counts.contactEnquiries, 
@@ -424,9 +381,7 @@ const DashboardStats = () => {
                 contentStyle={{ backgroundColor: "#fff", borderRadius: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }} 
               />
               <Legend />
-              <Line type="monotone" dataKey="safari" stroke={colors.safari} strokeWidth={3} dot={{ stroke: colors.safari, strokeWidth: 2, r: 4, fill: "white" }} />
-              <Line type="monotone" dataKey="hotel" stroke={colors.hotel} strokeWidth={3} dot={{ stroke: colors.hotel, strokeWidth: 2, r: 4, fill: "white" }} />
-              <Line type="monotone" dataKey="tour" stroke={colors.tour} strokeWidth={3} dot={{ stroke: colors.tour, strokeWidth: 2, r: 4, fill: "white" }} />
+              <Line type="monotone" dataKey="order" stroke={colors.order} strokeWidth={3} dot={{ stroke: colors.order, strokeWidth: 2, r: 4, fill: "white" }} />
               <Line type="monotone" dataKey="contact" stroke={colors.contact} strokeWidth={3} dot={{ stroke: colors.contact, strokeWidth: 2, r: 4, fill: "white" }} />
             </LineChart>
           </ResponsiveContainer>
@@ -437,7 +392,7 @@ const DashboardStats = () => {
         )}
       </Card>
 
-      {/* Bottom Charts - Now using real data */}
+      {/* Bottom Charts */}
       <Row gutter={24}>
         <Col xs={24} lg={12}>
           <Card
@@ -498,9 +453,7 @@ const DashboardStats = () => {
                     contentStyle={{ backgroundColor: "#fff", borderRadius: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }} 
                   />
                   <Legend />
-                  <Bar dataKey="safari" name="Safari" fill={colors.safari} radius={[8, 8, 0, 0]} />
-                  <Bar dataKey="hotel" name="Hotel" fill={colors.hotel} radius={[8, 8, 0, 0]} />
-                  <Bar dataKey="tour" name="Tour" fill={colors.tour} radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="order" name="Order" fill={colors.order} radius={[8, 8, 0, 0]} />
                   <Bar dataKey="contact" name="Contact" fill={colors.contact} radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>

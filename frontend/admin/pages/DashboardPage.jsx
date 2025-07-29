@@ -13,32 +13,15 @@ import {
   ConfigProvider,
 } from "antd";
 import {
-  Binoculars,
-  Building2,
-  Compass,
   Gauge,
-  MapPin,
-  MessageCircle,
   Newspaper,
   PhoneCall,
   ChevronDown,
   Package,
-  HelpCircle,
-  Hotel,
   Settings,
   LogOut,
   User,
-  IndianRupee,
-  Calendar,
-  Search,
-  LayoutDashboard,
-  Shield,
-  Lock,
-  Users,
   Sliders,
-  MessagesSquare,
-  BookOpen,
-  Briefcase,
 } from "lucide-react";
 import { UserOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -107,10 +90,6 @@ useEffect(() => {
         );
 
         setAdminProfile(res.data);
-        localStorage.setItem(
-          "admin-permissions",
-          JSON.stringify(permissionNames)
-        );
       } catch (err) {
         console.error("Failed to load admin profile", err);
       }
