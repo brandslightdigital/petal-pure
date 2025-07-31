@@ -4,7 +4,7 @@ import axios from "axios";
 const AdminBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);     
     const [totalPages, setTotalPages] = useState(1);
     const bookingsPerPage = 7; // ✅ Limit to 7 bookings per page
 
