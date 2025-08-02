@@ -15,15 +15,15 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: FaFacebook,
-      url: "https://www.facebook.com/yourPage",
+      url: "https://www.facebook.com/profile.php?id=61571664732781",
     },
     {
       icon: FaInstagram,
-      url: "https://www.instagram.com/yourProfile",
+      url: "https://www.instagram.com/petalpureoasis/",
     },
     {
       icon: FaYoutube,
-      url: "https://www.youtube.com/yourChannel",
+      url: "#",
     },
   ];
   return (
