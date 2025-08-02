@@ -59,7 +59,7 @@ export const Navbar = () => {
                 : "text-[#1c1c1c]"
             }`}
           >
-            {["Home", "Shop", "Collections", "About", "Contact"].map(
+            {["Home", "Shop", "About", "Contact"].map(
               (item, index) => (
                 <li key={index}>
                   <Link
@@ -120,7 +120,7 @@ export const Navbar = () => {
         >
           <div className="px-6 py-4 bg-[#FAF7F3] border-t border-[#e5c79a33]">
             <div className="flex flex-col space-y-4 text-[#1c1c1c]">
-              {["Home", "Shop", "Collections", "About", "Contact"].map(
+              {["Home", "Shop", "About", "Contact"].map(
                 (item, index) => (
                   <Link
                     key={index}

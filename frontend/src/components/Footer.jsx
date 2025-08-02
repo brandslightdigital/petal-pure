@@ -12,6 +12,20 @@ import { HiLocationMarker } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const socialLinks = [
+    {
+      icon: FaFacebook,
+      url: "https://www.facebook.com/yourPage",
+    },
+    {
+      icon: FaInstagram,
+      url: "https://www.instagram.com/yourProfile",
+    },
+    {
+      icon: FaYoutube,
+      url: "https://www.youtube.com/yourChannel",
+    },
+  ];
   return (
     <footer className="bg-[#1c1b1b] text-[#d8b278] pt-16 pb-8">
       <div className="max-w-[1300px] mx-auto px-4">
@@ -28,17 +42,17 @@ const Footer = () => {
               radiance.
             </p>
             <div className="flex space-x-4">
-              {[FaFacebook, FaInstagram, FaTwitter, FaPinterest, FaYoutube].map(
-                (Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="text-[#cfc5b1] hover:text-[#b8865b] transition-colors"
-                  >
-                    <Icon size={20} />
-                  </a>
-                )
-              )}
+              {socialLinks.map(({ icon: Icon, url }, i) => (
+                <a
+                  key={i}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#cfc5b1] hover:text-[#b8865b] transition-colors"
+                >
+                  <Icon size={20} />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -50,7 +64,10 @@ const Footer = () => {
             <ul className="space-y-2">
               {/* <li><Link to="/contact" className="text-[#cfc5b1] hover:text-[#b8865b] transition-colors">Contact Us</Link></li> */}
               <li>
-                <Link to="/about" className="text-[#cfc5b1] hover:text-[#b8865b]  transition-colors">
+                <Link
+                  to="/about"
+                  className="text-[#cfc5b1] hover:text-[#b8865b]  transition-colors"
+                >
                   About Us
                 </Link>
               </li>
@@ -155,7 +172,7 @@ const Footer = () => {
               <div className="flex items-center">
                 <IoMdMail className="text-[#b8865b] mr-3" />
                 <a
-                  href="mailto:hello@petalpure.com"
+                  href="mailto:info@petalspure.com"
                   className="hover:text-[#d8b278]"
                 >
                   info@petalspure.com
@@ -163,56 +180,10 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <FiPhone className="text-[#b8865b] mr-3" />
-                <a href="tel:+9118001234567" className="hover:text-[#d8b278]">
+                <a href="tel:+919310536132" className="hover:text-[#d8b278]">
                   +91 93105 36132
                 </a>
               </div>
-            </div>
-
-            {/* Newsletter */}
-            <div className="mt-6">
-              <h5 className="text-sm font-medium mb-2 text-[#d8b278]">
-                NEWSLETTER SIGNUP
-              </h5>
-              <p className="text-[#cfc5b1] text-sm mb-3">
-                Get 15% off your first order plus beauty tips
-              </p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="bg-[#2a2828] text-white px-4 py-2 text-sm rounded-l focus:outline-none focus:ring-1 focus:ring-[#d8b278] w-full"
-                />
-                <button className="bg-[#b8865b] hover:bg-[#c9a66b] text-white px-4 py-2 text-sm rounded-r transition-colors">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Payment Methods & Certifications */}
-        <div className="border-t border-[#2e2d2d] pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex space-x-6 mb-4 md:mb-0">
-              {["visa", "mastercard", "amex", "paypal", "upi"].map((img, i) => (
-                <img
-                  key={i}
-                  src={`/images/${img}.png`}
-                  alt={img}
-                  className="h-8"
-                />
-              ))}
-            </div>
-            <div className="flex space-x-4">
-              {["cruelty-free", "vegan", "organic-certified"].map((img, i) => (
-                <img
-                  key={i}
-                  src={`/images/${img}.png`}
-                  alt={img}
-                  className="h-8"
-                />
-              ))}
             </div>
           </div>
         </div>
@@ -220,8 +191,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-[#2e2d2d] pt-6 mt-6 text-center text-[#9e9b96] text-sm">
           <p>
-            © {new Date().getFullYear()} PetalPure Cosmetics. All Rights
-            Reserved.
+            © {new Date().getFullYear()} PetalPure Oasis. All Rights Reserved.
           </p>
         </div>
       </div>

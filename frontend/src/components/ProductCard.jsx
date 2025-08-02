@@ -76,17 +76,6 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
         onClick={handleClick}
         className=" overflow-hidden  transition-all duration-300 cursor-pointer flex flex-col h-full group relative"
       >
-        {/* Wishlist Button */}
-        <button
-          onClick={handleWishlistToggle}
-          className={`absolute top-2 left-2 p-2 rounded-full z-10 transition-colors ${
-            isInWishlist
-              ? "text-red-500 hover:text-red-600"
-              : "text-gray-400 hover:text-gray-600 bg-white/80 hover:bg-white"
-          }`}
-        >
-          <FaHeart size={16} />
-        </button>
 
         {/* Image Container */}
         <div className="relative aspect-square bg-[#f6eadc] flex items-center justify-center p-1 overflow-hidden">

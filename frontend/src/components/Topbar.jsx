@@ -42,10 +42,6 @@ const Topbar = () => {
 
         <div>Free Shipping </div>
 
-        <div className="flex items-center gap-1 cursor-pointer">
-          <span>English</span>
-          <ChevronRight size={12} />
-        </div>
       </div>
     </>
   );
