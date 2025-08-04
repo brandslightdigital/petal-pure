@@ -86,7 +86,7 @@ const About = () => {
             <img
               src={imagetwo}
               alt="Face Serum Jar"
-              className="w-80 md:w-96 transform rotate-3 hover:rotate-1 transition-transform duration-500 drop-shadow-2xl"
+              className="w-80 md:w-110 transform rotate-3 hover:rotate-1 transition-transform duration-500 drop-shadow-2xl"
             />
             
             {/* Floating badge */}
