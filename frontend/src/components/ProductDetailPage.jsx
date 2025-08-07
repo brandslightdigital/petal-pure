@@ -104,7 +104,7 @@ const ProductDetailPage = () => {
             <div className="hidden lg:flex gap-6">
               {/* Thumbnail List */}
               <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
-                {[product.image, product.backImage].map((img, index) => (
+                {[product.image, product.backImage, product.modelImage].map((img, index) => (
                   <img
                     key={index}
                     src={img}
@@ -140,7 +140,7 @@ const ProductDetailPage = () => {
               </div>
 
               <div className="flex gap-3 justify-center overflow-x-auto pb-2">
-                {[product.image, product.backImage].map((img, index) => (
+                {[product.image, product.backImage, product.modelImage].map((img, index) => (
                   <img
                     key={index}
                     src={img}
