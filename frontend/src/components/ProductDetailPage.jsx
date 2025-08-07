@@ -86,11 +86,11 @@ const ProductDetailPage = () => {
     },
     {
       icon: "/icons/happy-customer.svg",
-      title: "3M+ Happy Customers",
+      title: "Happy Customers",
     },
     {
       icon: "/icons/Make-in-india.svg",
-      title: "Made in India",
+      title: "Made in Korea & Japan",
     },
   ];
 
