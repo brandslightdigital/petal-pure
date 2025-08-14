@@ -124,7 +124,7 @@ const CheckoutPage = () => {
       const razorpayOrder = createOrderRes.data.order;
 
       const options = {
-        key: "rzp_test_5VP8aQsRZd71M5", // Replace with your actual test/live key
+        key: "rzp_live_R5Ar1qnsR4Rqvs", // Replace with your actual test/live key
         amount: razorpayOrder.amount.toString(),
         currency: razorpayOrder.currency || "INR",
         name: "Petal Pure Oasis",
