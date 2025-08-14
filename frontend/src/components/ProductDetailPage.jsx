@@ -104,19 +104,21 @@ const ProductDetailPage = () => {
             <div className="hidden lg:flex gap-6">
               {/* Thumbnail List */}
               <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
-                {[product.image, product.backImage, product.modelImage].map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`thumb-${index}`}
-                    onClick={() => setSelectedImage(img)}
-                    className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
-                      selectedImage === img
-                        ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
-                        : "border-gray-300 hover:border-yellow-400"
-                    }`}
-                  />
-                ))}
+                {[product.image, product.backImage, product.modelImage].map(
+                  (img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`thumb-${index}`}
+                      onClick={() => setSelectedImage(img)}
+                      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
+                        selectedImage === img
+                          ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
+                          : "border-gray-300 hover:border-yellow-400"
+                      }`}
+                    />
+                  )
+                )}
               </div>
 
               {/* Main Image */}
@@ -140,19 +142,21 @@ const ProductDetailPage = () => {
               </div>
 
               <div className="flex gap-3 justify-center overflow-x-auto pb-2">
-                {[product.image, product.backImage, product.modelImage].map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`thumb-${index}`}
-                    onClick={() => setSelectedImage(img)}
-                    className={`w-16 h-16 object-cover cursor-pointer border-2 transition-all duration-300 flex-shrink-0 ${
-                      selectedImage === img
-                        ? "border-yellow-600 shadow-md"
-                        : "border-gray-300"
-                    }`}
-                  />
-                ))}
+                {[product.image, product.backImage, product.modelImage].map(
+                  (img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`thumb-${index}`}
+                      onClick={() => setSelectedImage(img)}
+                      className={`w-16 h-16 object-cover cursor-pointer border-2 transition-all duration-300 flex-shrink-0 ${
+                        selectedImage === img
+                          ? "border-yellow-600 shadow-md"
+                          : "border-gray-300"
+                      }`}
+                    />
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -313,6 +317,9 @@ const ProductDetailPage = () => {
                 </div>
               </div>
             </div>
+            <div className=" border-dashed border-4 p-4 rounded-xl border-orange-600">
+                <p className="text-sm leading-relaxed">{product.thought}</p>
+            </div>
             {/* Key Highlights */}
             {/* Features */}
             {/* PRODUCT DETAILS ACCORDION STYLE SECTION */}
@@ -323,31 +330,49 @@ const ProductDetailPage = () => {
 
               {/* Specifications */}
               {product.specifications && (
-                <AccordionSection title="Specifications" defaultOpen={true}>
-                  <p className="text-gray-500 text-sm mb-3">
-                    Technical details and features
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm">
-                    {Object.entries(product.specifications).map(
-                      ([key, value]) => (
-                        <div key={key} className="flex justify-between pr-6">
-                          <span className="font-medium text-gray-900">
-                            {key}
-                          </span>
+                <AccordionSection
+                  title="Infused with Potent Ingredients"
+                  defaultOpen={true}
+                >
+                  <ul className="space-y-3 text-sm">
+                    {Object.values(product.specifications).map(
+                      (value, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-yellow-600 mr-2 mt-1">•</span>
                           <span className="text-gray-700">{value}</span>
-                        </div>
+                        </li>
                       )
                     )}
-                  </div>
+                  </ul>
                 </AccordionSection>
               )}
-
-              {/* Description */}
-              {product.description && (
-                <AccordionSection title="Description">
-                  <p className="text-sm leading-relaxed">
-                    {product.description}
-                  </p>
+              {/* benefits */}
+              {product.benefits && (
+                <AccordionSection
+                  title="Benefits You’ll Love"
+                  defaultOpen={false}
+                >
+                  <ul className="space-y-3 text-sm">
+                    {Object.values(product.benefits).map((value, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-yellow-600 mr-2 mt-1">•</span>
+                        <span className="text-gray-700">{value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionSection>
+              )}
+              {/* how to use */} 
+              {product.howtouse && (
+                <AccordionSection title="How to Use" defaultOpen={false}>
+                  <ul className="space-y-3 text-sm">
+                    {Object.values(product.howtouse).map((value, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-yellow-600 mr-2 mt-1">•</span>
+                        <span className="text-gray-700">{value}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </AccordionSection>
               )}
 
@@ -357,38 +382,6 @@ const ProductDetailPage = () => {
                   <p className="text-sm leading-relaxed">
                     {product.returnPolicy}
                   </p>
-                </AccordionSection>
-              )}
-
-              {/* Marketed By */}
-              {product.marketedBy && (
-                <AccordionSection title="Marketed By">
-                  <div className="space-y-1 text-sm">
-                    {product.marketedBy.origin && (
-                      <p>
-                        <span className="font-medium">Country of Origin:</span>{" "}
-                        {product.marketedBy.origin}
-                      </p>
-                    )}
-                    {product.marketedBy.company && (
-                      <p>
-                        <span className="font-medium">Company:</span>{" "}
-                        {product.marketedBy.company}
-                      </p>
-                    )}
-                    {product.marketedBy.address && (
-                      <p>
-                        <span className="font-medium">Address:</span>{" "}
-                        {product.marketedBy.address}
-                      </p>
-                    )}
-                    {product.marketedBy.email && (
-                      <p>
-                        <span className="font-medium">Email:</span>{" "}
-                        {product.marketedBy.email}
-                      </p>
-                    )}
-                  </div>
                 </AccordionSection>
               )}
             </div>

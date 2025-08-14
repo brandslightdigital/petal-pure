@@ -123,9 +123,10 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
 
         {/* Product Details */}
         <div className=" flex flex-col flex-grow mt-5">
-          <h3 className="text-base font-semibold text-[#3b2f2f] mb-2 ">
+ <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
             {product.name}
           </h3>
+
           <span className="text-xs text-[#b8865b] uppercase tracking-wide mb-1">
             {product.category}
           </span>

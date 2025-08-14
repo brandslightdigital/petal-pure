@@ -1,24 +1,34 @@
 [
   {
-    "name": "Hydra Booster",
+    "name": "Petal Pure 6X Hydra Booster (Japanese Serum)",
     "slug": "hydra-booster",
     "category": "Serums",
     "image": "/images/27.png",
     "backImage": "/images/28.png",
     "hoverImage": "/images/28.png",
+    "modelImage": "/mockups/model9.png",
     "price": 3500,
     "originalPrice": 6865,
-    "discountPercent": 31,
-    "description": "A lightweight, fast-absorbing serum that gives you the coveted 'glass skin' look by deeply hydrating and strengthening your skin's barrier.",
+    "discountPercent": 49,
+    "description": "Unleash the Power of Intense Hydration and Skin Repair Introducing the 6X Hydra Booster, a luxurious Japanese serum designed to transform your nighttime skincare routine.",
+    "thought": "Wake up to brighter, smoother, and healthier-looking skin with the 6X Hydra Booster. Say goodbye to dryness, wrinkles, and dullness—your nighttime skincare essential is here!",
     "photo": "/images/49.png",
     "specifications": {
-      "Form": "Serum",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "30ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "Blue Copper Peptides: Smooth fine lines, enhance elasticity, and repair skin for a youthful glow.",
+      "2": "Red Algae Extract: Brightens skin tone, reduces pigmentation, and revitalizes your complexion.",
+      "3": "Hyaluronic Acid: Provides deep hydration, improving dryness and leaving your skin plump and soft."
+    },
+    "benefits": {
+      "1": "Fights wrinkles and improves skin elasticity.",
+      "2": "Hydrates deeply for smooth, delicate skin.",
+      "3": "Brightens and evens skin tone for a radiant glow.",
+      "4": "Repairs and rejuvenates overnight while you sleep."
+    },
+    "howtouse": {
+      "1": "Cleanse your face thoroughly.",
+      "2": "Apply a few drops of 6X Hydra Booster to your face and neck.",
+      "3": "Gently pat the serum into your skin.",
+      "4": "Follow with a night cream for enhanced results available on petal pure too."
     },
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
@@ -29,7 +39,7 @@
     }
   },
   {
-    "name": "korean Glass Skin Serum",
+    "name": "Petal Pure Korean Glass Skin Serum",
     "slug": "korean-glass-serum",
     "category": "Serums",
     "image": "/images/31.png",
@@ -38,46 +48,78 @@
     "modelImage": "/mockups/model2.png",
     "price": 3000,
     "originalPrice": 5882,
-    "discountPercent": 27,
-    "description": "A lightweight, fast-absorbing serum that gives you the coveted 'glass skin' look by deeply hydrating and strengthening your skin's barrier.",
+    "discountPercent": 49,
+    "description": "Achieve the legendary Korean 'glass skin' glow with this lightweight, fast-absorbing serum. Formulated to deeply hydrate while strengthening your skin's moisture barrier for that enviable translucent radiance.",
+    "thought": "Your shortcut to that coveted dewy, poreless look—this serum delivers instant luminosity and long-term skin perfection!",
     "photo": "/images/49.png",
     "specifications": {
-      "Form": "Serum",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "30ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "Hyaluronic Acid Complex: Attracts and locks in moisture",
+      "2": "Ceramide-Infused: Reinforces skin's protective barrier",
+      "3": "Korean Skincare Technology: Authentic glass skin formulation",
+      "4": "Size: 30ml (1.01 fl.oz)"
     },
+    "benefits": {
+      "1": "Instant hydration boost for plump, dewy skin",
+      "2": "Minimizes appearance of pores and fine lines",
+      "3": "Creates smooth canvas for flawless makeup application",
+      "4": "Improves skin texture with continued use"
+    },
+    "howtouse": {
+      "1": "Apply after cleansing and toning",
+      "2": "Dispense 2-3 drops onto fingertips",
+      "3": "Gently press into face and neck",
+      "4": "Follow with moisturizer for enhanced results"
+    },
+    "keyFeatures": [
+      "Fragrance-free formula",
+      "Paraben-free composition",
+      "Suitable for all skin types",
+      "24-month shelf life"
+    ],
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
-      "origin": "India",
+      "origin": "Korea",
       "company": "Petal Pure Pvt. Ltd.",
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
-    }
+    },
+    "ingredientHighlights": [
+      "Hyaluronic Acid (3 molecular weights)",
+      "Ceramide NP",
+      "Madecassoside",
+      "Panthenol"
+    ]
   },
   {
-    "name": "Midnight Repair Night Cream",
-    "slug": "deep-repair-night-cream",
+    "name": " Petal Pure Night Cream - Go to Bed with Me",
+    "slug": "petal-pure-night-cream",
+    "category": "Night Creams",
     "image": "/images/29.png",
     "backImage": "/images/30.png",
     "hoverImage": "/images/30.png",
+    "modelImage": "/mockups/model10.png",
     "price": 4000,
     "originalPrice": 7842,
-    "discountPercent": 27,
-    "category": "Night Creams",
-    "description": "A rich, nourishing night cream infused with ceramides and hyaluronic acid to repair skin barrier and boost hydration while you sleep.",
-    "photo": "/images/25.png",
+    "discountPercent": 49,
+    "description": "Transform your skin overnight with Petal Pure Night Cream, the ultimate solution for melasma, pigmentation, and dullness. This game-changing formula is specially crafted to restore your skin's natural glow while you sleep.",
+    "thought": "Wake up to clearer, brighter, and healthier skin. With the promise to 'Go to Bed with Me,' this powerhouse night cream is your trusted partner in tackling pigmentation and restoring your confidence, one restful night at a time.",
+    "photo": "/images/49.png",
     "specifications": {
-      "Form": "Cream",
-      "Skin Type": "Dry, Combination, Sensitive",
-      "Shelf Life": "24 Months",
-      "Volume": "50g",
-      "Application Area": "Face & Neck",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "Melasma & Pigmentation Reduction: Effectively reduces dark spots, discoloration, and uneven skin tone.",
+      "2": "Overnight Hydration: Deeply nourishes and moisturizes for soft, dewy skin by morning.",
+      "3": "Brightening Complex: Enhances skin's natural glow and promotes an even, flawless complexion."
+    },
+    "benefits": {
+      "1": "Repair & Restore: Reduces signs of aging, fine lines, and improves skin elasticity.",
+      "2": "Soothing Care: Calms stressed and tired skin, rejuvenating it overnight.",
+      "3": "Intensive Overnight Treatment: Works while you sleep for maximum effectiveness.",
+      "4": "Skin Confidence: Helps restore even tone and natural radiance."
+    },
+    "howtouse": {
+      "1": "Cleanse your face thoroughly before bedtime.",
+      "2": "Apply a small amount of cream evenly over face and neck.",
+      "3": "Gently massage in upward circular motions.",
+      "4": "Leave overnight for intensive repair and wake up to refreshed skin."
     },
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
@@ -85,178 +127,271 @@
       "company": "Petal Pure Pvt. Ltd.",
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
-    }
+    },
+    "tagline": "Shop now and experience the difference!"
   },
-    {
-    "name": "Korean Glass BB Sunscreen",
-    "slug": "real-s-korean-glass-bb-sunscreen",
+  {
+    "name": "Petal Pure Korean Glass BB Sunscreen",
+    "slug": "korean-glass-bb-sunscreen",
+    "category": "Sunscreens",
     "image": "/images/39.png",
     "backImage": "/images/41.png",
     "hoverImage": "/images/40.png",
+    "modelImage": "/mockups/model11.png",
     "price": 2000,
     "originalPrice": 3922,
-    "discountPercent": 27,
-    "category": "Sunscreens",
-    "description": "A multifunctional BB sunscreen that provides medium coverage, brightens complexion, and protects from UVA/UVB rays.",
+    "discountPercent": 49,
+    "description": "Experience the ultimate 3-in-1 Korean beauty innovation - a BB cream, sunscreen, and skin perfector in one lightweight formula. This multitasking marvel provides buildable medium coverage while offering SPF protection and delivering that coveted glass-skin glow.",
+    "thought": "Your secret weapon for flawless skin in seconds - sun protection, perfect coverage, and radiant finish all in one effortless step!",
     "photo": "/images/48.png",
     "specifications": {
-      "Form": "BB Sunscreen",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "50ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "SPF + PA Protection: Shields against UVA/UVB rays",
+      "2": "Buildable Coverage: Evens skin tone without heaviness",
+      "3": "Light-Diffusing Particles: Creates soft-focus glow",
+      "4": "Size: 50ml (1.69 fl.oz)"
     },
+    "benefits": {
+      "1": "Trifecta performance: Sunscreen + BB cream + illuminator",
+      "2": "Non-greasy, breathable formula for all-day wear",
+      "3": "Blurs imperfections while letting skin breathe",
+      "4": "Skincare benefits with continued use"
+    },
+    "howtouse": {
+      "1": "Apply as final step of morning routine",
+      "2": "Dispense pearl-sized amount",
+      "3": "Dot evenly on face and blend outward",
+      "4": "Reapply every 2-3 hours for sun protection"
+    },
+    "keyFeatures": [
+      "Fragrance-free",
+      "Paraben-free",
+      "Suitable for all skin types",
+      "24-month shelf life",
+      "Water-resistant formula"
+    ],
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
-      "origin": "India",
+      "origin": "Korea",
       "company": "Petal Pure Pvt. Ltd.",
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
-    }
+    },
+    "shades": [
+      "Light",
+      "Medium",
+      "Tan"
+    ],
+    "spfRating": "SPF 50+ PA+++"
   },
   {
-    "name": "Korean Sliky Skin Brighting Mist",
-    "slug": "silky-skin-mist-tea-tree",
+    "name": "Petal Pure Korean Silky Skin Brightening Mist",
+    "slug": "silky-skin-brightening-mist",
+    "category": "Face Mists",
     "image": "/images/13.png",
-    "hoverImage": "/images/15.png",
     "backImage": "/images/14.png",
-    "modelImage" : "/mockups/model1.png",
-    "category": "Face Mists",
-    "price": 1350,
-    "originalPrice": 2647,
-    "discountPercent": 27,
-    "description": "A refreshing facial mist infused with Australian tea tree extract to soothe irritation and brighten dull skin on the go.",
-    "photo": "/images/33.png",
-    "specifications": {
-      "Form": "Mist",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "100ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
-    },
-    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
-    "marketedBy": {
-      "origin": "India",
-      "company": "Petal Pure Pvt. Ltd.",
-      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
-      "email": "info@petalpure.com"
-    }
-  },
-  {
-    "name": "Acne Control Face Wash",
-    "slug": "acne-control-face-wash",
-    "image": "/images/10.png",
-    "hoverImage": "/images/12.png",
-    "backImage": "/images/11.png",
-    "modelImage":"/mockups/model4.png",
-    "category": "Cleansers",
-    "price": 499,
-    "originalPrice": 978,
-    "discountPercent": 27,
-    "description": "A gentle cleansing foam formulated with salicylic acid and tea tree to clear breakouts without stripping moisture.",
-    "photo": "/images/31.png",
-    "specifications": {
-      "Form": "Face Wash",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "100ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
-    },
-    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
-    "marketedBy": {
-      "origin": "India",
-      "company": "Petal Pure Pvt. Ltd.",
-      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
-      "email": "info@petalpure.com"
-    }
-  },
-  {
-    "name": "Korean Moisturizer",
-    "slug": "korean-moisturiser",
-    "image": "/images/4.png",
-    "category": "Moisturizers",
-    "backImage": "/images/6.png",
-    "hoverImage": "/images/5.png",
-    "modelImage":"/mockups/model3.png",
-    "price": 2000,
-    "originalPrice": 3922,
-    "discountPercent": 27,
-    "description": "An all-day hydrating cream that locks in moisture, improves skin elasticity, and leaves a soft, smooth finish.",
-    "photo": "/images/27.png",
-    "specifications": {
-      "Form": "Cream",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "50ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
-    },
-    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
-    "marketedBy": {
-      "origin": "India",
-      "company": "Petal Pure Pvt. Ltd.",
-      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
-      "email": "info@petalpure.com"
-    }
-  },
-  {
-    "name": "Rose Petals Mist",
-    "slug": "rose-petals-mist",
-    "category": "Face Mists",
-    "image": "/images/1.png",
-    "backImage": "/images/3.png",
-    "hoverImage": "/images/2.png",
+    "hoverImage": "/images/15.png",
+    "modelImage": "/mockups/model1.png",
     "price": 1350,
     "originalPrice": 2647,
     "discountPercent": 49,
-    "description": "A refreshing facial mist infused with real rose petals that hydrates, soothes skin, and gives a dewy glow. Perfect for quick hydration throughout the day.",
-    "photo": "/images/49.png",
+    "description": "Experience the elegance of Korean skincare with this brightening mist that refines your complexion and enhances radiance. Formulated with advanced brightening technology for a luminous glow.",
+    "thought": "Achieve that coveted Korean glass skin glow with every spritz of this lightweight, brightening mist.",
+    "photo": "/images/mist-detail.png",
     "specifications": {
-      "Form": "Spray Mist",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "12 Months",
-      "Volume": "100ml",
-      "Application Area": "Face & Neck",
-      "Fragrance-Free": "No",
-      "Paraben-Free": "Yes"
+      "1": "Brightening Complex: Targets dullness and uneven skin tone",
+      "2": "Ultra-Fine Mist: Delivers even application for full-face coverage",
+      "3": "Korean Skincare Technology: Advanced formula for visible radiance",
+      "4": "Size: 120 ml (4.058 fl.oz)"
     },
+    "benefits": {
+      "1": "Instant luminosity boost for tired skin",
+      "2": "Helps fade dark spots over time",
+      "3": "Prepares skin for better makeup application",
+      "4": "Refreshes skin throughout the day"
+    },
+    "howtouse": {
+      "1": "Shake well before use",
+      "2": "Hold 8-10 inches from face",
+      "3": "Mist over face after cleansing or whenever skin needs refreshment",
+      "4": "Can be used over makeup"
+    }
+  },
+  {
+    "name": "Petal Pure Acne Control Face Wash",
+    "slug": "acne-control-face-wash",
+    "category": "Cleansers",
+    "image": "/images/10.png",
+    "backImage": "/images/11.png",
+    "hoverImage": "/images/12.png",
+    "modelImage": "/mockups/model4.png",
+    "price": 499,
+    "originalPrice": 978,
+    "discountPercent": 49,
+    "description": "A dermatologist-developed foaming cleanser that fights acne while maintaining skin's natural moisture barrier. Formulated with 2% salicylic acid and tea tree oil to target breakouts without causing dryness or irritation.",
+    "thought": "Wake up to clearer skin every morning - this gentle yet effective formula works overnight to prevent breakouts while you sleep!",
+    "photo": "/images/31.png",
+    "specifications": {
+      "1": "2% Salicylic Acid: Penetrates pores to clear acne",
+      "2": "Tea Tree Oil: Natural antibacterial properties",
+      "3": "pH Balanced: Maintains skin's natural acidity",
+      "4": "Size: 100ml (3.38 fl.oz)"
+    },
+    "benefits": {
+      "1": "Reduces existing acne and prevents new breakouts",
+      "2": "Gentle enough for daily use without over-drying",
+      "3": "Soothes inflammation and redness",
+      "4": "Leaves skin feeling clean but not stripped"
+    },
+    "howtouse": {
+      "1": "Wet face with lukewarm water",
+      "2": "Dispense a small amount (pea-sized)",
+      "3": "Massage gently in circular motions for 30-60 seconds",
+      "4": "Rinse thoroughly and pat dry"
+    },
+    "keyFeatures": [
+      "Fragrance-free",
+      "Paraben-free",
+      "Non-comedogenic",
+      "Suitable for acne-prone skin",
+      "24-month shelf life"
+    ],
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
       "origin": "India",
       "company": "Petal Pure Pvt. Ltd.",
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
+    },
+    "activeIngredients": {
+      "Salicylic Acid": "2% (Beta Hydroxy Acid)",
+      "Tea Tree Oil": "1% (Melaleuca Alternifolia)",
+      "Niacinamide": "3%",
+      "Aloe Vera": "Soothing extract"
+    },
+    "clinicalResults": "Shown to reduce acne by 78% in 4 weeks with regular use"
+  },
+  {
+    "name": "Petal Pure Korean Moisturizer",
+    "slug": "korean-moisturizer",
+    "category": "Moisturizers",
+    "image": "/images/4.png",
+    "backImage": "/images/6.png",
+    "hoverImage": "/images/5.png",
+    "modelImage": "/mockups/model3.png",
+    "price": 2000,
+    "originalPrice": 3922,
+    "discountPercent": 49,
+    "description": "Experience Korean skincare excellence with this all-day hydrating cream. Formulated to lock in moisture, boost elasticity, and deliver a velvety-soft finish for glass-like skin.",
+    "thought": "Your passport to dewy, hydrated skin—lightweight yet intensely nourishing, just like K-beauty promises!",
+    "photo": "/images/27.png",
+    "specifications": {
+      "1": "Hydro-Lock Technology: 72-hour moisture retention",
+      "2": "Ceramide Complex: Strengthens skin barrier",
+      "3": "Made in Korea: Authentic K-beauty formulation",
+      "4": "Size: 50ml (1.69 fl.oz)"
+    },
+    "benefits": {
+      "1": "Deep hydration without greasiness",
+      "2": "Visibly improves skin elasticity",
+      "3": "Creates a smooth base for makeup",
+      "4": "Soothes and repairs stressed skin"
+    },
+    "howtouse": {
+      "1": "Apply after serum/essence",
+      "2": "Take a pearl-sized amount",
+      "3": "Warm between palms and press onto face",
+      "4": "Gently massage upward until absorbed"
+    },
+    "keyFeatures": [
+      "Fragrance-free",
+      "Paraben-free",
+      "Suitable for all skin types",
+      "24-month shelf life"
+    ],
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "Korea",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    },
+    "ingredientHighlights": [
+      "Hyaluronic Acid: Binds moisture to skin",
+      "Centella Asiatica: Calms irritation",
+      "Peptides: Boosts collagen production"
+    ]
+  },
+  {
+    "name": "Petal Pure Rose Petals Moisturizing Essence Toner",
+    "slug": "rose-petals-toner",
+    "category": "Toners",
+    "image": "/images/1.png",
+    "backImage": "/images/3.png",
+    "hoverImage": "/images/2.png",
+    "modelImage": "/mockups/model13.png",
+    "price": 1350,
+    "originalPrice": 2647,
+    "discountPercent": 49,
+    "description": "A rose-infused toner crafted to hydrate and refine your complexion. Enriched with the natural essence of rose petals, this mist transforms your skincare routine with its soothing and revitalizing properties.",
+    "thought": "Embrace the harmony of hydration and radiance with this refreshing, flower-powered mist.",
+    "photo": "/images/rose-detail.png",
+    "specifications": {
+      "1": "Rose Petal Extract: Rich in antioxidants and skin-soothing properties",
+      "2": "Hydrating Formula: 72-hour moisture lock technology",
+      "3": "Made in Korea with 99.9% pure ingredients",
+      "4": "Size: 120 ml (4.058 fl.oz)"
+    },
+    "benefits": {
+      "1": "Deep Moisture: Infuses lasting hydration",
+      "2": "Balance & Glow: Regulates oil production",
+      "3": "Pore Refinement: Minimizes pores",
+      "4": "Gentle Nourishment: Soothes sensitive skin"
+    },
+    "howtouse": {
+      "1": "Apply after cleansing",
+      "2": "Pour onto cotton pad or palms",
+      "3": "Gently press into skin",
+      "4": "Use morning and night"
     }
   },
   {
-    "name": "Radiant Glow Refreshing",
-    "slug": "radiant-glow-refreshing",
-    "image": "/images/7.png",
+    "name": "Petal Pure Radiant Glow Refreshing",
+    "slug": "radiant-glow-refreshing-mist",
     "category": "Face Mists",
-    "hoverImage": "/images/8.png",
+    "image": "/images/7.png",
     "backImage": "/images/9.png",
-    "modelImage":"/mockups/model5.png",
+    "hoverImage": "/images/8.png",
+    "modelImage": "/mockups/model5.png",
     "price": 490,
     "originalPrice": 961,
-    "discountPercent": 27,
-    "description": "A vitamin C-infused facial mist that revives tired skin, boosts radiance, and provides antioxidant protection.",
+    "discountPercent": 49,
+    "description": "A vitamin C-infused facial mist that instantly revives tired skin, boosts radiance, and provides powerful antioxidant protection against environmental stressors.",
+    "thought": "Your on-the-go glow booster! This refreshing mist delivers an instant dose of radiance whenever your skin needs a pick-me-up.",
     "photo": "/images/29.png",
     "specifications": {
-      "Form": "Mist",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "100ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "Vitamin C Complex: Brightens and evens skin tone",
+      "2": "Antioxidant Shield: Protects against free radical damage",
+      "3": "Ultra-Fine Mist: Provides even, weightless application",
+      "4": "Size: 100ml (3.38 fl.oz)"
     },
+    "benefits": {
+      "1": "Instant refreshment and hydration boost",
+      "2": "Reduces appearance of fatigue and dullness",
+      "3": "Prepares skin for flawless makeup application",
+      "4": "Can be used over makeup to set and refresh"
+    },
+    "howtouse": {
+      "1": "Shake well before use",
+      "2": "Hold 6-8 inches from face",
+      "3": "Mist over face whenever skin needs revitalization",
+      "4": "Gently pat if excess product accumulates"
+    },
+    "keyFeatures": [
+      "Fragrance-free formula",
+      "Paraben-free composition",
+      "Suitable for all skin types",
+      "24-month shelf life"
+    ],
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
       "origin": "India",
@@ -266,55 +401,77 @@
     }
   },
   {
-    "name": "Collagen Sunscreen SPF50",
-    "slug": "collagen-laser-sunscreen-100",
+    "name": "Petal Pure Collagen Laser Sunscreen SPF 50+ PA+++",
+    "slug": "collagen-laser-sunscreen",
+    "category": "Sunscreen",
     "image": "/images/36.png",
     "backImage": "/images/38.png",
     "hoverImage": "/images/37.png",
-    "modelImage":"/mockups/model6.png",
+    "modelImage": "/mockups/model6.png",
     "price": 2500,
-    "category": "Sunscreens",
     "originalPrice": 4902,
-    "discountPercent": 27,
-    "description": "SPF 50 PA+++ sunscreen enriched with collagen peptides to protect against UV damage while firming the skin.",
-    "photo": "/images/46.png",
+    "discountPercent": 49,
+    "description": "Unleash the power of sun protection and skincare in one luxurious formula! Petal Pure Collagen Laser Sunscreen is more than just a shield—it’s a rejuvenating treat for your skin. Packed with hydrolyzed collagen, water-soluble collagen, and essential amino acids, it defends against harmful UVA/UVB rays while restoring moisture, vitality, and a radiant glow.",
+    "thought": "Glow brighter, stay protected, and feel confident with Petal Pure—because your skin deserves the best care under the sun!",
+    "photo": "/images/49.png",
     "specifications": {
-      "Form": "Sunscreen",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "50ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "SPF 50+ PA+++: Provides maximum UVA/UVB protection.",
+      "2": "Hydrolyzed Collagen: Hydrates, firms, and revitalizes skin.",
+      "3": "Water-Soluble Collagen: Enhances absorption for deep nourishment.",
+      "4": "Essential Amino Acids: Supports skin repair and health."
+    },
+    "benefits": {
+      "1": "Lightweight & Non-Greasy: Fast-absorbing for all-day comfort.",
+      "2": "Skin Rejuvenation: Combats dryness and fatigue for a radiant glow.",
+      "3": "Made in Korea: Formulated with advanced skincare technology.",
+      "4": "Dual Action: Sun protection + anti-aging benefits in one."
+    },
+    "howtouse": {
+      "1": "Apply as the final step of your morning skincare routine.",
+      "2": "Take a generous amount and dot evenly on face and neck.",
+      "3": "Gently blend outward in circular motions.",
+      "4": "Reapply every 2-3 hours for prolonged sun exposure."
     },
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
-      "origin": "India",
+      "origin": "Korea",
       "company": "Petal Pure Pvt. Ltd.",
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
-    }
+    },
+    "tagline": "Your skin deserves the best care under the sun!"
   },
   {
-    "name": "Glass Lip Oil",
+    "name": "Petal Pure Glass Lip Oil – Shine Bright, Feel Light!",
     "slug": "glass-lip-oil",
     "category": "Lip Care",
     "image": "/images/25.png",
     "backImage": "/images/26.png",
     "hoverImage": "/images/26.png",
+    "modelImage": "/mockups/model12.png",
     "price": 1050,
     "originalPrice": 2059,
     "discountPercent": 49,
-    "description": "A glossy, non-sticky lip oil that gives your lips a glass-like shine while deeply nourishing with vitamin E and natural oils.",
+    "description": "Elevate your lip game with the Petal Pure Glass Lip Oil, the ultimate secret to irresistibly glossy, hydrated lips. Infused with nourishing ingredients, this luxurious lip oil glides on effortlessly, leaving your lips with a glass-like finish that's as stunning as it is comfortable.",
+    "thought": "Glow, hydrate, and shine with Petal Pure Glass Lip Oil—because your lips deserve the best! Say goodbye to dryness and hello to a burst of hydration that lasts all day.",
     "photo": "/images/49.png",
     "specifications": {
-      "Form": "Oil",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "18 Months",
-      "Volume": "15ml",
-      "Application Area": "Lips",
-      "Fragrance-Free": "No",
-      "Paraben-Free": "Yes"
+      "1": "Glass-Finish Technology: Delivers crystal-clear, high-shine effect",
+      "2": "Nourishing Blend: Infused with hydrating and smoothing ingredients",
+      "3": "Weightless Formula: Non-sticky and comfortable for all-day wear",
+      "4": "Universal Appeal: Enhances natural lip color for every skin tone"
+    },
+    "benefits": {
+      "1": "Mirror-Like Shine: Achieve a stunning glossy finish",
+      "2": "Hydration Hero: Moisturizes and smooths dry lips",
+      "3": "Fine Line Reduction: Helps minimize lip lines and wrinkles",
+      "4": "Versatile Wear: Perfect for both casual and glamorous looks"
+    },
+    "howtouse": {
+      "1": "Apply directly to clean lips using the applicator",
+      "2": "Glide evenly across lips for full coverage",
+      "3": "Reapply throughout the day as needed",
+      "4": "Can be worn alone or over lipstick for extra shine"
     },
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
@@ -322,29 +479,86 @@
       "company": "Petal Pure Pvt. Ltd.",
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
-    }
+    },
+    "tagline": "Your perfect pout starts here!"
   },
   {
-    "name": "Anti-Wrinkle Eye Cream",
+    "name": "Petal Pure Black Truffle Eye Cream – Ageless Eyes, Timeless Beauty",
     "slug": "black-truffle-eye-cream",
+    "category": "Eye Care",
     "image": "/images/16.png",
     "backImage": "/images/18.png",
     "hoverImage": "/images/17.png",
-    "modelImage":"/mockups/model8.png",
+    "modelImage": "/mockups/model8.png",
     "price": 1500,
     "originalPrice": 2941,
-    "discountPercent": 27,
-    "category": "Eye Care",
-    "description": "A luxurious eye treatment infused with black truffle extract and peptides to reduce fine lines and dark circles.",
-    "photo": "/images/35.png",
+    "discountPercent": 49,
+    "description": "Unveil the secret to youthful, radiant eyes with our luxurious Black Truffle Anti-Wrinkle Eye Cream. Infused with the rare and precious black truffle, this powerhouse formula targets fine lines, wrinkles, and puffiness, leaving your under-eye area firmer, brighter, and deeply moisturized.",
+    "thought": "Transform your daily routine into a luxurious ritual. With the magic of black truffle, your eyes will speak volumes—because beauty begins with the eyes.",
+    "photo": "/images/49.png",
     "specifications": {
-      "Form": "Eye Cream",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "15ml",
-      "Application Area": "Under Eyes",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "Black Truffle Extract: Rare ingredient known for its anti-aging properties",
+      "2": "Triple Action Formula: Combats wrinkles, puffiness and dark circles simultaneously",
+      "3": "Advanced Delivery System: Ensures deep penetration of active ingredients",
+      "4": "Dermatologically Tested: Safe for all skin types including sensitive skin"
+    },
+    "benefits": {
+      "1": "Firm & Lift: Smooths wrinkles and enhances elasticity",
+      "2": "Hydrate & Nourish: Deeply moisturizes for soft, supple skin",
+      "3": "Brighten & Revive: Reduces puffiness and dark circles",
+      "4": "Anti-Aging Powerhouse: Visibly reduces signs of aging around eyes"
+    },
+    "howtouse": {
+      "1": "Gently cleanse and tone your face",
+      "2": "Take a small amount (pea-sized) on your ring finger",
+      "3": "Dot lightly around the orbital bone (avoid direct eye area)",
+      "4": "Pat gently until fully absorbed, morning and night"
+    },
+    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
+    "marketedBy": {
+      "origin": "India",
+      "company": "Petal Pure Pvt. Ltd.",
+      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
+      "email": "info@petalpure.com"
+    },
+    "keyFeatures": [
+      "Visible results in 4 weeks",
+      "Non-greasy, fast-absorbing formula",
+      "Fragrance-free and non-irritating",
+      "Suitable for all skin types"
+    ]
+  },
+  {
+    "name": "Petal Pure Collagen Night Wrapping Mask",
+    "slug": "collagen-night-wrapping-mask",
+    "category": "Night Masks",
+    "image": "/images/22.png",
+    "backImage": "/images/24.png",
+    "hoverImage": "/images/23.png",
+    "modelImage": "/mockups/model7.png",
+    "price": 1000,
+    "originalPrice": 1961,
+    "discountPercent": 49,
+    "description": "Wake up to radiant, hydrated skin with our Petal Pure Collagen Night Wrapping Mask. Infused with Collagen Extract, Niacinamide, and Ceramide NP, this luxurious overnight mask works tirelessly to replenish moisture, smoothen texture, and restore firmness while you sleep.",
+    "thought": "Your beauty sleep just got an upgrade. Designed to lock in hydration and boost skin elasticity, it leaves you with a fresh, glowing complexion by morning.",
+    "photo": "/images/49.png",
+    "specifications": {
+      "1": "Collagen Extract: Restores skin firmness and elasticity",
+      "2": "Niacinamide: Brightens complexion and improves skin texture",
+      "3": "Ceramide NP: Strengthens skin barrier and locks in moisture",
+      "4": "Overnight Formula: Works while you sleep for maximum effectiveness"
+    },
+    "benefits": {
+      "1": "Deeply hydrates and nourishes the skin",
+      "2": "Promotes a smoother, firmer texture overnight",
+      "3": "Powered by scientifically proven ingredients for real results",
+      "4": "Wakeskin looking refreshed and radiant"
+    },
+    "howtouse": {
+      "1": "Apply after your evening skincare routine",
+      "2": "Take sufficient amount and apply evenly over face and neck",
+      "3": "Gently massage until fully absorbed",
+      "4": "Leave on overnight and rinse with water in the morning"
     },
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
@@ -355,33 +569,52 @@
     }
   },
   {
-    "name": "Collagen Night Mask",
-    "slug": "collagen-night-wrapping-mask",
-    "image": "/images/22.png",
-    "backImage": "/images/24.png",
-    "hoverImage": "/images/23.png",
-    "modelImage":"/mockups/model7.png",
-    "price": 1000,
-    "originalPrice": 1961,
-    "discountPercent": 27,
-    "category": "Face Masks",
-    "description": "An overnight mask enriched with collagen and ceramides to deeply hydrate and repair skin while you sleep.",
-    "photo": "/images/39.png",
+    "name": "Test",
+    "slug": "leadr-acne-essence-gel",
+    "category": "Acne Treatment",
+    "image": "/images/57.png",
+    "backImage": "/images/58.png",
+    "hoverImage": "/images/56.png",
+    "modelImage": "/mockups/model-acne.png",
+    "price": 1,
+    "originalPrice": 3922,
+    "discountPercent": 49,
+    "description": "Wake up to flawless skin every morning! This nighttime magic gel is formulated to target stubborn acne while you sleep. With a potent blend of skin-nourishing nutrients, it works to reduce acne by up to 98%, leaving no marks behind.",
+    "thought": "Let the LEADR Acne Essence Gel transform your nighttime skincare routine into a rejuvenating experience. Say goodbye to acne and hello to a radiant, mark-free complexion!",
+    "photo": "/images/acne-gel-detail.png",
     "specifications": {
-      "Form": "Night Mask",
-      "Skin Type": "All Skin Types",
-      "Shelf Life": "24 Months",
-      "Volume": "50ml",
-      "Application Area": "Face",
-      "Fragrance-Free": "Yes",
-      "Paraben-Free": "Yes"
+      "1": "Overnight Acne Treatment: Works while you sleep to combat breakouts",
+      "2": "98% Efficacy: Clinically proven to reduce acne appearance",
+      "3": "Scar Prevention: Helps prevent post-acne marks and pigmentation",
+      "4": "Oil Balancing Formula: Regulates sebum production without drying",
+      "5": "Lightweight Gel Texture: Absorbs quickly without greasiness"
     },
+    "benefits": {
+      "1": "Rapid Results: Visible improvement in acne overnight",
+      "2": "Deep Hydration: Maintains skin moisture balance",
+      "3": "Non-Irritating: Gentle formula suitable for sensitive skin",
+      "4": "Skin Recovery: Promotes healing for clearer, healthier skin"
+    },
+    "howtouse": {
+      "1": "Cleanse face thoroughly before bedtime",
+      "2": "Apply a thin layer over entire face or spot-treat affected areas",
+      "3": "Gently pat until fully absorbed",
+      "4": "Use nightly as part of your acne treatment routine"
+    },
+    "keyIngredients": [
+      "Salicylic Acid (2%): Unclogs pores and exfoliates",
+      "Niacinamide: Reduces inflammation and redness",
+      "Zinc PCA: Controls oil production",
+      "Panthenol: Soothes and repairs skin"
+    ],
     "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
     "marketedBy": {
       "origin": "India",
-      "company": "Petal Pure Pvt. Ltd.",
-      "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
-      "email": "info@petalpure.com"
-    }
+      "company": "LEADR Skincare",
+      "address": "22-B, Tech Park, Sector 18, Gurugram 122015, India",
+      "email": "support@leadrskincare.com"
+    },
+    "clinicalResults": "98% users reported reduced acne in 4 weeks of regular use",
+    "size": "30ml"
   }
 ]
