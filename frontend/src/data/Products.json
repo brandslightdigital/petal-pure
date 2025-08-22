@@ -567,54 +567,5 @@
       "address": "1H-no. 181, Ambica Vihar, Sunder Vihar, West Delhi 110087, India",
       "email": "info@petalpure.com"
     }
-  },
-  {
-    "name": "Test",
-    "slug": "leadr-acne-essence-gel",
-    "category": "Acne Treatment",
-    "image": "/images/57.png",
-    "backImage": "/images/58.png",
-    "hoverImage": "/images/56.png",
-    "modelImage": "/mockups/model-acne.png",
-    "price": 1,
-    "originalPrice": 3922,
-    "discountPercent": 49,
-    "description": "Wake up to flawless skin every morning! This nighttime magic gel is formulated to target stubborn acne while you sleep. With a potent blend of skin-nourishing nutrients, it works to reduce acne by up to 98%, leaving no marks behind.",
-    "thought": "Let the LEADR Acne Essence Gel transform your nighttime skincare routine into a rejuvenating experience. Say goodbye to acne and hello to a radiant, mark-free complexion!",
-    "photo": "/images/acne-gel-detail.png",
-    "specifications": {
-      "1": "Overnight Acne Treatment: Works while you sleep to combat breakouts",
-      "2": "98% Efficacy: Clinically proven to reduce acne appearance",
-      "3": "Scar Prevention: Helps prevent post-acne marks and pigmentation",
-      "4": "Oil Balancing Formula: Regulates sebum production without drying",
-      "5": "Lightweight Gel Texture: Absorbs quickly without greasiness"
-    },
-    "benefits": {
-      "1": "Rapid Results: Visible improvement in acne overnight",
-      "2": "Deep Hydration: Maintains skin moisture balance",
-      "3": "Non-Irritating: Gentle formula suitable for sensitive skin",
-      "4": "Skin Recovery: Promotes healing for clearer, healthier skin"
-    },
-    "howtouse": {
-      "1": "Cleanse face thoroughly before bedtime",
-      "2": "Apply a thin layer over entire face or spot-treat affected areas",
-      "3": "Gently pat until fully absorbed",
-      "4": "Use nightly as part of your acne treatment routine"
-    },
-    "keyIngredients": [
-      "Salicylic Acid (2%): Unclogs pores and exfoliates",
-      "Niacinamide: Reduces inflammation and redness",
-      "Zinc PCA: Controls oil production",
-      "Panthenol: Soothes and repairs skin"
-    ],
-    "returnPolicy": "Returns are accepted within 7 days of delivery. Product must be unused and in original packaging. Refunds processed within 5-7 working days.",
-    "marketedBy": {
-      "origin": "India",
-      "company": "LEADR Skincare",
-      "address": "22-B, Tech Park, Sector 18, Gurugram 122015, India",
-      "email": "support@leadrskincare.com"
-    },
-    "clinicalResults": "98% users reported reduced acne in 4 weeks of regular use",
-    "size": "30ml"
   }
 ]
