@@ -76,7 +76,6 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
         onClick={handleClick}
         className=" overflow-hidden  transition-all duration-300 cursor-pointer flex flex-col h-full group relative"
       >
-
         {/* Image Container */}
         <div className="relative aspect-square bg-[#f6eadc] flex items-center justify-center p-1 overflow-hidden">
           {/* Main Image - Fades out on hover */}
@@ -123,7 +122,7 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
 
         {/* Product Details */}
         <div className=" flex flex-col flex-grow mt-5">
- <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
+          <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
             {product.name}
           </h3>
 
