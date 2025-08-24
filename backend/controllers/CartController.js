@@ -83,20 +83,28 @@ exports.removeCartItem = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
-// controller: clearCart.js
 exports.clearCart = async (req, res) => {
-  const { cartId } = req.body;
-  if (!cartId) return res.status(400).json({ success: false, message: "cartId is required" });
-
   try {
-    const cart = await Cart.findOne({ cartId });
-    if (!cart) return res.status(404).json({ success: false, message: "Cart not found" });
+    // body se ya query se cartId lo (front/back dono cases handle)
+    const cartId = req.body.cartId || req.query.cartId;
+    if (!cartId) {
+      return res.status(400).json({ success: false, message: 'cartId required' });
+    }
 
-    cart.items = []; // Empty cart
-    await cart.save();
+    const updated = await Cart.findOneAndUpdate(
+      { cartId },
+      { $set: { items: [] } },
+      { new: true } // upsert mat karo, warna bekaar docs banenge
+    );
 
-    res.status(200).json({ success: true, message: "Cart cleared" });
+    // agar cart mila hi nahi to bhi 200 de do, UX smooth
+    return res.json({
+      success: true,
+      cart: updated || { cartId, items: [] }
+    });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error('clearCart error:', err);
+    res.status(500).json({ success: false, message: 'Failed to clear cart' });
   }
 };
+

@@ -51,14 +51,14 @@ const CartPage = () => {
     useEffect(() => {
         fetchCart();
     }, []);
-      useEffect(() => {
-    const handleStorageChange = () => {
-      fetchCart(); // Refresh cart when storage changes
-    };
+    useEffect(() => {
+        const handleStorageChange = () => {
+            fetchCart(); // Refresh cart when storage changes
+        };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
 
     if (loading) return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -273,67 +273,72 @@ const CartPage = () => {
                                 </div>
                             </div>
 
-<button
-  onClick={() => navigate("/checkout")}
-  className="w-full bg-gray-800 hover:bg-gray-900 text-white py-4 rounded-lg font-semibold text-lg transition-colors"
->
-  PLACE ORDER
-</button>   
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem('draftId');
+                                    localStorage.removeItem('draft:fp');
+                                    navigate('/checkout', { state: { startFresh: true } });
+                                }}
+                                className="w-full bg-gray-800 hover:bg-gray-900 text-white py-4 rounded-lg font-semibold text-lg transition-colors"
+                            >
+                                PLACE ORDER
+                            </button>
+
                         </div>
                     </div>
                 </div>
             </div>
-             {/* Payment Methods Section */}
-        <div className="max-w-7xl mx-auto mt-2 p-6">
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            {/* SSL Security */}
-            <div className="flex items-center gap-2 text-gray-600">
-              <div className="text-white px-1 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/lock.png" className="w-30 h-15" alt="" />
-              </div>
+            {/* Payment Methods Section */}
+            <div className="max-w-7xl mx-auto mt-2 p-6">
+                <div className="flex items-center justify-center gap-2 flex-wrap">
+                    {/* SSL Security */}
+                    <div className="flex items-center gap-2 text-gray-600">
+                        <div className="text-white px-1 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/lock.png" className="w-30 h-15" alt="" />
+                        </div>
+                    </div>
+
+                    {/* Payment Methods */}
+                    <div className="flex items-center gap-3 flex-wrap">
+                        {/* Paytm */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/paytm.png" className="w-30 h-15" alt="" />
+                        </div>
+
+                        {/* Visa */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/visa.png" className="w-30 h-15" alt="" />
+                        </div>
+
+                        {/* MasterCard */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/card.png" className="w-30 h-15" alt="" />
+                        </div>
+
+                        {/* UPI */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/upi.png" className="w-30 h-15" alt="" />
+                        </div>
+
+                        {/* Maestro */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/maestro.png" className="w-30 h-15" alt="" />
+                        </div>
+
+                        {/* RuPay */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/rupay.png" className="w-30 h-15" alt="" />
+                        </div>
+
+
+                        {/* Net Banking */}
+                        <div className="  text-white px-3 py-1 rounded text-sm font-bold">
+                            <img src="/paymentimage/net.png" className="w-30 h-15" alt="" />
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            
-            {/* Payment Methods */}
-            <div className="flex items-center gap-3 flex-wrap">
-              {/* Paytm */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/paytm.png" className="w-30 h-15" alt="" />
-              </div>
-              
-              {/* Visa */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/visa.png" className="w-30 h-15" alt="" />
-              </div>
-              
-              {/* MasterCard */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/card.png" className="w-30 h-15" alt="" />
-              </div>
-              
-              {/* UPI */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/upi.png" className="w-30 h-15" alt="" />
-              </div>
-              
-              {/* Maestro */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/maestro.png" className="w-30 h-15" alt="" />
-              </div>
-              
-              {/* RuPay */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/rupay.png" className="w-30 h-15" alt="" />
-              </div>
-              
-              
-              {/* Net Banking */}
-              <div className="  text-white px-3 py-1 rounded text-sm font-bold">
-                <img src="/paymentimage/net.png" className="w-30 h-15" alt="" />
-              </div>
-              
-            </div>
-          </div>
-        </div>  
         </div>
     );
 };

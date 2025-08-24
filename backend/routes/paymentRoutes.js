@@ -1,7 +1,7 @@
 // routes/paymentRoutes.js
 const express = require('express');
 const router = express.Router();
-const { createOrder, verifyPayment, getOrderDetails, getOrder, getAllOrders } = require('../controllers/PaymentController');
+const { createOrder, verifyPayment, getOrderDetails, getOrder, getAllOrders, placeCOD } = require('../controllers/PaymentController');
 
 // @route   POST /api/payment/create-order
 router.post('/create-order', createOrder);
@@ -12,6 +12,8 @@ router.post('/verify', verifyPayment);
 router.get('/orders', getAllOrders);
 router.get('/orders/:id',  getOrder);
 router.get('/:orderId', getOrderDetails);
+router.post('/cod', placeCOD);
+
 
 
 module.exports = router;

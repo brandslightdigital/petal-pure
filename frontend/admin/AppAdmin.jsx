@@ -14,6 +14,8 @@ import GlobalSettings from "./pages/AdminGlobalSetting";
 import AdminProfile from "./pages/AdminProfile";
 import OrdersPage from "./pages/Order";
 import OrderDetailsPage from "./pages/OrderDetails";
+import DraftsPage from "./pages/DraftPage";
+import DraftDetail from "./pages/DraftDetail";
 
 const AppAdmin = () => {
   return (
@@ -28,6 +30,8 @@ const AppAdmin = () => {
           <Route path="Admin-profile" element={<AdminProfile />} />
           <Route path="orders" element={<OrdersPage />} />
           <Route path="orders/:orderId" element={<OrderDetailsPage />} />
+          <Route path="drafts" element={<DraftsPage />} />
+          <Route path="drafts/:id" element={<DraftDetail/>} />
         </Route>
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>

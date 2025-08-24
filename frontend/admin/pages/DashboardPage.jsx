@@ -104,6 +104,12 @@ useEffect(() => {
       label: "Dashboard",
       onClick: () => navigate("/admin/dashboard"),
     },
+        {
+    key: "/admin/dashboard/orders",
+    icon: <Package size={20} />,
+    label: "Orders",
+    onClick: () => navigate("/admin/dashboard/orders"),
+  },
     {
       key: "/admin/dashboard/contact-enquiry",
       icon: <PhoneCall size={18} />,
@@ -111,30 +117,30 @@ useEffect(() => {
       onClick: () => navigate("/admin/dashboard/contact-enquiry"),
     },
     {
-    key: "/admin/dashboard/orders",
-    icon: <Package size={20} />,
-    label: "Orders",
-    onClick: () => navigate("/admin/dashboard/orders"),
-  },
-    {
-      key: "/admin/dashboard/blogs",
-      icon: <Newspaper size={18} />,
-      label: "Blogs",
-      onClick: () => navigate("/admin/dashboard/blogs"),
+      key: "/admin/dashboard/drafts",
+      icon: <PhoneCall size={18} />,
+      label: "Draft page",
+      onClick: () => navigate("/admin/dashboard/drafts"),
     },
-    {
-      key: "settings",
-      icon: <Settings size={20} />,
-      label: "Settings",
-      children: [
-        {
-          key: "/admin/dashboard/setting",
-          icon: <Sliders size={18} />,
-          label: "Global Settings",
-          onClick: () => navigate("/admin/dashboard/setting"),
-        },
-      ],
-    }
+    // {
+    //   key: "/admin/dashboard/blogs",
+    //   icon: <Newspaper size={18} />,
+    //   label: "Blogs",
+    //   onClick: () => navigate("/admin/dashboard/blogs"),
+    // },
+    // {
+    //   key: "settings",
+    //   icon: <Settings size={20} />,
+    //   label: "Settings",
+    //   children: [
+    //     {
+    //       key: "/admin/dashboard/setting",
+    //       icon: <Sliders size={18} />,
+    //       label: "Global Settings",
+    //       onClick: () => navigate("/admin/dashboard/setting"),
+    //     },
+    //   ],
+    // }
   ];
 
   const userMenu = [
