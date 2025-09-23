@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import products from "../data/Products.json";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { addToCart } from "../utils/cartUtils";
+import { useCart } from "../../context/CartContext"; // Import useCart
+
 const AccordionSection = ({ title, children, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -25,11 +26,14 @@ const AccordionSection = ({ title, children, defaultOpen = false }) => {
     </div>
   );
 };
+
 const ProductDetailPage = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
+  const { addToCart } = useCart(); // Use cart context
+
   useEffect(() => {
     const found = products.find((p) => p.slug === slug);
     if (found) {
@@ -43,14 +47,16 @@ const ProductDetailPage = () => {
       <p className="text-center mt-10 text-gray-600">Product not found.</p>
     );
   }
+
   const handleAddToCart = async (e) => {
     e.stopPropagation();
     try {
+      // Use context addToCart instead of direct import
       await addToCart({
         ...product,
         quantity: 1,
       });
-      window.dispatchEvent(new Event("cartUpdated"));
+      // Cart drawer automatically open ho jayega context ke through
     } catch {
       console.error("Failed to add to cart");
     }
@@ -59,10 +65,9 @@ const ProductDetailPage = () => {
   const handleBuyNow = async (e) => {
     e.stopPropagation();
     try {
+      // Use context addToCart
       await addToCart({ ...product, quantity: 1 });
-
-      window.dispatchEvent(new Event("cartUpdated"));
-
+      
       navigate("/checkout", {
         state: {
           directBuy: true,
@@ -77,6 +82,7 @@ const ProductDetailPage = () => {
       console.error("Failed to process Buy Now");
     }
   };
+
   const dummyRating = 4.8;
   const dummyReviewCount = 87;
   const items = [
@@ -89,8 +95,8 @@ const ProductDetailPage = () => {
       title: "Happy Customers",
     },
     {
-      icon: "/icons/Make-in-india.svg",
-      title: "Made in Korea & Japan",
+      icon: "/icons/support.svg",
+      title: "24/7 Support",
     },
   ];
 
@@ -201,6 +207,7 @@ const ProductDetailPage = () => {
                 )}
               </div>
             </div>
+            
             {/* discount */}
             <div className="bg-blue-100 text-sm rounded-md px-4 py-3 mt-4 flex items-center justify-between gap-4">
               <span className="font-medium text-gray-800">
@@ -223,7 +230,6 @@ const ProductDetailPage = () => {
                   alt="Amazon Pay"
                   className="h-6 w-auto"
                 />
-                {/* <img src="/icons/citi.png" alt="Citi Bank" className="h-6 w-auto" /> */}
               </div>
             </div>
 
@@ -233,6 +239,7 @@ const ProductDetailPage = () => {
                 {product.description}
               </p>
             </div>
+            
             {/* Action Buttons */}
             <div className="flex gap-4 pt-4">
               <button
@@ -241,12 +248,12 @@ const ProductDetailPage = () => {
               >
                 Add to Cart
               </button>
-              <Link
+              <button
                 onClick={handleBuyNow}
-                className="text-center cursor-pointer bg-gradient-to-r from-yellow-600 to-amber-600 text-white px-8 py-4 rounded-lg w-full hover:from-amber-600 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-bold text-lg"
+                className="cursor-pointer bg-gradient-to-r from-yellow-600 to-amber-600 text-white px-8 py-4 rounded-lg w-full hover:from-amber-600 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-bold text-lg"
               >
                 Buy Now
-              </Link>
+              </button>
             </div>
 
             {/* Check section */}
@@ -317,11 +324,11 @@ const ProductDetailPage = () => {
                 </div>
               </div>
             </div>
+            
             <div className=" border-dashed border-4 p-4 rounded-xl border-orange-600">
                 <p className="text-sm leading-relaxed">{product.thought}</p>
             </div>
-            {/* Key Highlights */}
-            {/* Features */}
+            
             {/* PRODUCT DETAILS ACCORDION STYLE SECTION */}
             <div className="mt-10">
               <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-2">
@@ -346,10 +353,11 @@ const ProductDetailPage = () => {
                   </ul>
                 </AccordionSection>
               )}
+              
               {/* benefits */}
               {product.benefits && (
                 <AccordionSection
-                  title="Benefits You’ll Love"
+                  title="Benefits You'll Love"
                   defaultOpen={false}
                 >
                   <ul className="space-y-3 text-sm">
@@ -362,6 +370,7 @@ const ProductDetailPage = () => {
                   </ul>
                 </AccordionSection>
               )}
+              
               {/* how to use */} 
               {product.howtouse && (
                 <AccordionSection title="How to Use" defaultOpen={false}>

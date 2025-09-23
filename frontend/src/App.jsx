@@ -1,9 +1,8 @@
+// App.jsx
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import Topbar from './components/Topbar'
 import './font.css';
-
 import Footer from './components/Footer'
 import { Navbar } from './components/Navbar'
 import Shop from './components/Shop'
@@ -12,7 +11,7 @@ import CheckoutPage from './components/CheckoutPage'
 import ContactPage from './pages/ContactPage'
 import SuccessPage from './components/SuccessPage'
 import ScrollToTop from './components/ScrolltoTop'
-import CartPage from './pages/CartPage'
+// import CartPage from './pages/CartPage' // REMOVE THIS
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import RefundPolicy from './pages/RefundPolicy'
 import CancellationPolicy from './pages/CancellationPolicy'
@@ -22,37 +21,38 @@ import TermsAndConditions from './pages/Terms&condition'
 import NewsBlogDetail from "./pages/NewsBlogDetail";
 import NewsBlogsGrid from './components/NewsBlogPage';
 import About from './pages/About';
-
+import { CartProvider } from '../context/CartContext';
+import CartDrawer from './components/CartDrawer';
 
 export const App = () => {
   return (
     <>
-      <BrowserRouter>
-        {/* <Topbar/>   */}
-        <ScrollToTop />
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path="/product/:slug" element={<ProductDetailPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/success" element={<SuccessPage />} />
-             <Route path="/news-blog/:slug" element={<NewsBlogDetail />} />
-          <Route path="/cart" element={<CartPage/>} />
-          <Route path="/about" element={<About/>}/>
-          <Route path="/blogs" element={<NewsBlogsGrid/>}/>
-
-          {/* Term & condition , Privcy Policy, Refund Policy */}
-          <Route path="/privacy-policy" element={<PrivacyPolicy/>} />"
-          <Route path="refund-policy" element={<RefundPolicy/>} />
-          <Route path="/cancellation-policy" element={<CancellationPolicy/>} />
-          <Route path="/shipping-policy" element={<ShippingPolicy />} />
-          <Route path="/disclaimer" element={<Disclaimer/>}/>
-          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Navbar />
+          <CartDrawer />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/shop' element={<Shop />} />
+            <Route path="/product/:slug" element={<ProductDetailPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/news-blog/:slug" element={<NewsBlogDetail />} />
+            {/* <Route path="/cart" element={<CartPage/>} /> REMOVE THIS LINE */}
+            <Route path="/about" element={<About/>}/>
+            <Route path="/blogs" element={<NewsBlogsGrid/>}/>
+            <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
+            <Route path="refund-policy" element={<RefundPolicy/>} />
+            <Route path="/cancellation-policy" element={<CancellationPolicy/>} />
+            <Route path="/shipping-policy" element={<ShippingPolicy />} />
+            <Route path="/disclaimer" element={<Disclaimer/>}/>
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </CartProvider>
     </>
   )
 }

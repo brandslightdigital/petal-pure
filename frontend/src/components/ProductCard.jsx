@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaArrowRight, FaEye, FaHeart } from "react-icons/fa";
+import { FaShoppingCart, FaEye, FaHeart } from "react-icons/fa";
 import ProductQuickView from "./ProductQuickView";
-import { addToCart } from "../utils/cartUtils";
+import { useCart } from "../../context/CartContext";
 
-const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
+const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const [showQuickView, setShowQuickView] = useState(false);
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false); // Manage the loading state
+  // eslint-disable-next-line no-unused-vars
   const [isBuyingNow, setIsBuyingNow] = useState(false);
+  const { addToCart: addItemToCart, openCartDrawer } = useCart(); // Destructure the addToCart and openCartDrawer function
 
   if (!product) return null;
 
@@ -18,18 +20,14 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
-    setIsAddingToCart(true);
+    setIsAddingToCart(true); // Set loading state for adding to cart
     try {
-      await addToCart({
-        ...product,
-        quantity: 1,
-      });
-      window.dispatchEvent(new Event("cartUpdated"));
+      await addItemToCart(product); // This will handle adding and opening drawer
+      openCartDrawer(); // Trigger the drawer to open when an item is added
     } catch (error) {
       console.error("Failed to add to cart:", error);
-      // Consider adding toast notification here
     } finally {
-      setIsAddingToCart(false);
+      setIsAddingToCart(false); // Reset the loading state
     }
   };
 
@@ -37,7 +35,7 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
     e.stopPropagation();
     setIsBuyingNow(true);
     try {
-      await addToCart({ ...product, quantity: 1 });
+      await addItemToCart({ ...product, quantity: 1 });
       window.dispatchEvent(new Event("cartUpdated"));
 
       navigate("/checkout", {
@@ -52,16 +50,8 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
       });
     } catch (error) {
       console.error("Failed to process Buy Now:", error);
-      // Consider adding toast notification here
     } finally {
       setIsBuyingNow(false);
-    }
-  };
-
-  const handleWishlistToggle = (e) => {
-    e.stopPropagation();
-    if (onWishlistToggle) {
-      onWishlistToggle(product);
     }
   };
 
@@ -70,11 +60,12 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
     const discount = ((originalPrice - price) / originalPrice) * 100;
     return Math.round(discount);
   };
+
   return (
     <>
       <div
         onClick={handleClick}
-        className=" overflow-hidden  transition-all duration-300 cursor-pointer flex flex-col h-full group relative"
+        className="overflow-hidden transition-all duration-300 cursor-pointer flex flex-col h-full group relative"
       >
         {/* Image Container */}
         <div className="relative aspect-square bg-[#f6eadc] flex items-center justify-center p-1 overflow-hidden">
@@ -121,7 +112,7 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
         </div>
 
         {/* Product Details */}
-        <div className=" flex flex-col flex-grow mt-5">
+        <div className="flex flex-col flex-grow mt-5">
           <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
             {product.name}
           </h3>
@@ -150,23 +141,13 @@ const ProductCard = ({ product, onWishlistToggle, isInWishlist }) => {
               <button
                 onClick={handleAddToCart}
                 disabled={isAddingToCart}
-                className={`flex items-center justify-center gap-2 border-1 border-[#000000] text-[#fdfdfd] bg-black hover:bg-transparent hover:text-black py-2 px-3  text-sm font-medium transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-2 border-1 border-[#000000] text-[#fdfdfd] bg-black hover:bg-transparent hover:text-black py-2 px-3 text-sm font-medium transition-all cursor-pointer ${
                   isAddingToCart ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
                 <FaShoppingCart size={14} />
                 <span>{isAddingToCart ? "Adding..." : "Add To Cart"}</span>
               </button>
-              {/* <button
-                onClick={handleBuyNow}
-                disabled={isBuyingNow}
-                className={`flex items-center justify-center gap-2 border border-[#5e412e] text-[#5e412e] hover:bg-[#f6eadc] py-2 px-3 rounded-md text-sm font-medium transition-all ${
-                  isBuyingNow ? "opacity-70 cursor-not-allowed" : ""
-                }`}
-              >
-                <span>{isBuyingNow ? "Processing..." : "Buy"}</span>
-                <FaArrowRight size={12} />
-              </button> */}
             </div>
           </div>
         </div>

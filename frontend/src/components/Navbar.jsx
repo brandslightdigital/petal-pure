@@ -11,10 +11,12 @@ import { Link } from "react-router-dom";
 import logo from "../assets/images/petalpurelogo.png";
 import Topbar from "./Topbar";
 import { getCartCount } from "../utils/cartUtils";
+import { useCart } from '../../context/CartContext';
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const { openCart, cart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,11 +41,10 @@ export const Navbar = () => {
       <Topbar />
 
       <nav
-        className={`w-full z-50 transition-all duration-300 sticky top-0 ${
-          isScrolled
+        className={`w-full z-50 transition-all duration-300 sticky top-0 ${isScrolled
             ? "bg-[#1c1c1c]/90 backdrop-blur-lg shadow-md"
             : "bg-[#FAF7F3]"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
@@ -53,11 +54,10 @@ export const Navbar = () => {
 
           {/* Desktop Links */}
           <ul
-            className={`hidden md:flex space-x-8  font-medium tracking-wide ${
-              isScrolled
+            className={`hidden md:flex space-x-8  font-medium tracking-wide ${isScrolled
                 ? "text-[#FAF7F3]"
                 : "text-[#1c1c1c]"
-            }`}
+              }`}
           >
             {["Home", "Shop", "About", "Contact"].map(
               (item, index) => (
@@ -90,7 +90,7 @@ export const Navbar = () => {
             </button> */}
 
             {/* Cart */}
-            <Link
+            {/* <Link
               to="/cart"
               className="relative p-2 rounded-full bg-gradient-to-r from-[#D7B98E] to-[#E6A5A1] text-black hover:scale-105 transition shadow-lg"
             >
@@ -100,7 +100,19 @@ export const Navbar = () => {
                   {cartCount}
                 </span>
               )}
-            </Link>
+            </Link> */}
+            <button
+              onClick={openCart}
+              className="relative p-2 rounded-full bg-gradient-to-r from-[#D7B98E] to-[#E6A5A1] text-black hover:scale-105 transition shadow-lg cursor-pointer"
+            >
+              <FaShoppingCart size={16} />
+              {cart && cart.items && cart.items.length > 0 && (
+                <span className="absolute -top-1 -right-1 text-[10px] bg-white text-black w-5 h-5 flex items-center justify-center rounded-full font-bold">
+                  {cart.items.reduce((total, item) => total + item.quantity, 0)}
+                </span>
+              )}
+            </button>
+
 
             {/* Mobile Menu */}
             <button
@@ -114,9 +126,8 @@ export const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`md:hidden transition-all duration-300 overflow-hidden ${isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+            }`}
         >
           <div className="px-6 py-4 bg-[#FAF7F3] border-t border-[#e5c79a33]">
             <div className="flex flex-col space-y-4 text-[#1c1c1c]">
