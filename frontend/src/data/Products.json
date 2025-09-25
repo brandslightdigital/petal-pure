@@ -223,13 +223,17 @@
     "image": "/images/10.png",
     "backImage": "/images/11.png",
     "hoverImage": "/images/12.png",
+    "images": [
+      "/images/60.jpeg",
+      "/images/61.jpeg",
+      "/images/62.jpeg"
+    ],
     "modelImage": "/mockups/model4.png",
     "price": 499,
     "originalPrice": 978,
     "discountPercent": 49,
     "description": "A dermatologist-developed foaming cleanser that fights acne while maintaining skin's natural moisture barrier. Formulated with 2% salicylic acid and tea tree oil to target breakouts without causing dryness or irritation.",
     "thought": "Wake up to clearer skin every morning - this gentle yet effective formula works overnight to prevent breakouts while you sleep!",
-    "photo": "/images/31.png",
     "specifications": {
       "1": "2% Salicylic Acid: Penetrates pores to clear acne",
       "2": "Tea Tree Oil: Natural antibacterial properties",
@@ -302,8 +306,8 @@
   {
     "id": "r2",
     "rating": 4,
-    "title": "Good but thoda pricey",
-    "body": "Moisturizer accha hai, glow bhi deta hai lekin price thoda zyada hai. Quality ke liye phir bhi worth hai.",
+    "title": "Good but a bit pricey",
+    "body": "The moisturizer is really nice, gives a natural glow, but feels slightly expensive. Still worth it for the quality.",
     "authorName": "Rohit Mehra",
     "verifiedBuyer": true,
     "source": "Petalpureoasis.com",
@@ -325,8 +329,8 @@
   {
     "id": "r4",
     "rating": 4,
-    "title": "Hydration ache se deta hai",
-    "body": "Main office AC me rehta hoon, toh skin dry ho jati hai. Ye cream lagane ke baad tightness bilkul nahi hoti.",
+    "title": "Hydrates well",
+    "body": "I sit in AC all day and my skin gets dry. This cream keeps the tightness away and feels soothing.",
     "authorName": "Saurabh Jain",
     "verifiedBuyer": true,
     "source": "Petalpureoasis.com",
@@ -350,7 +354,7 @@
     "id": "r6",
     "rating": 5,
     "title": "Visible glow",
-    "body": "Teen din use karne ke baad hi skin healthy aur glow lagti hai. Makeup ke neeche bhi easily blend ho jata hai.",
+    "body": "Within just three days my skin started looking healthier and glowing. Works beautifully under makeup as well.",
     "authorName": "Harpreet Kaur",
     "verifiedBuyer": true,
     "source": "Petalpureoasis.com",
@@ -374,7 +378,7 @@
     "id": "r8",
     "rating": 5,
     "title": "Highly recommended",
-    "body": "Main usually moisturizer skip karti thi kyunki chipchip feel hota tha. Ye wala ekdum alag hai, daily routine me add kar liya.",
+    "body": "I usually skipped moisturizers because of stickiness. This one feels different, light yet nourishing. Added to my daily routine now.",
     "authorName": "Nisha Patel",
     "verifiedBuyer": true,
     "source": "Petalpureoasis.com",
@@ -397,16 +401,15 @@
   {
     "id": "r10",
     "rating": 5,
-    "title": "Best moisturizer ab tak",
-    "body": "Indian market me jitne bhi moisturizers try kiye, ye sabse accha laga. Skin dewy aur hydrated rehti hai full day.",
+    "title": "Best moisturizer so far",
+    "body": "Out of all moisturizers I’ve tried in the Indian market, this one is the best. Skin stays dewy and hydrated all day.",
     "authorName": "Vikas Nair",
     "verifiedBuyer": true,
     "source": "Petalpureoasis.com",
     "date": "2025-03-18",
     "likes": 12
   }
-]
-,
+],
     "specifications": {
       "1": "Hydro-Lock Technology: 72-hour moisture retention",
       "2": "Ceramide Complex: Strengthens skin barrier",

@@ -109,13 +109,16 @@ const ProductDetailPage = () => {
   const [withImageOnly, setWithImageOnly] = useState(false);
 
 
-  useEffect(() => {
-    const found = products.find((p) => p.slug === slug);
-    if (found) {
-      setProduct(found);
-      setSelectedImage(found.image);
-    }
-  }, [slug]);
+useEffect(() => {
+  const found = products.find((p) => p.slug === slug);
+  if (found) {
+    setProduct(found);
+    setSelectedImage(
+      found.images && found.images.length > 0 ? found.images[0] : found.image
+    );
+  }
+}, [slug]);
+
 
   if (!product) {
     return (
@@ -197,22 +200,29 @@ const ProductDetailPage = () => {
             {/* Desktop Layout */}
             <div className="hidden lg:flex gap-6">
               {/* Thumbnail List */}
-              <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
-                {[product.image, product.backImage, product.modelImage].map(
-                  (img, index) => (
-                    <img
-                      key={index}
-                      src={img}
-                      alt={`thumb-${index}`}
-                      onClick={() => setSelectedImage(img)}
-                      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${selectedImage === img
-                        ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
-                        : "border-gray-300 hover:border-yellow-400"
-                        }`}
-                    />
-                  )
-                )}
-              </div>
+{/* Thumbnail List */}
+<div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
+  {[
+    product.image,
+    product.backImage,
+    // product.hoverImage,
+    product.modelImage,
+    ...(product.images || []), // spread array properly
+  ].map((img, index) => (
+    <img
+      key={index}
+      src={img}
+      alt={`thumb-${index}`}
+      onClick={() => setSelectedImage(img)}
+      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
+        selectedImage === img
+          ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
+          : "border-gray-300 hover:border-yellow-400"
+      }`}
+    />
+  ))}
+</div>
+
 
               {/* Main Image */}
               <div className="flex-1 max-w-lg">
