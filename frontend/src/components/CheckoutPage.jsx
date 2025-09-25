@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaTruck, FaLock } from "react-icons/fa";
@@ -94,31 +93,30 @@ const CheckoutPage = () => {
     }));
   };
 
-  const calculateTotals = () => {
-    if (!cart || !cart.items)
-      return {
-        originalPrice: 0,
-        totalPrice: 0,
-        discount: 0,
-        gst: 0,
-        finalAmount: 0,
-      };
+const calculateTotals = () => {
+  if (!cart || !cart.items)
+    return {
+      originalPrice: 0,
+      totalPrice: 0,
+      discount: 0,
+      finalAmount: 0,
+    };
 
-    let totalPrice = 0;
-    let originalPrice = 0;
+  let totalPrice = 0;
+  let originalPrice = 0;
 
-    cart.items.forEach((item) => {
-      const qty = Number(item.quantity || 1);
-      totalPrice += Number(item.price) * qty;
-      originalPrice += Number(item.originalPrice || item.price) * qty;
-    });
+  cart.items.forEach((item) => {
+    const qty = Number(item.quantity || 1);
+    totalPrice += Number(item.price) * qty;
+    originalPrice += Number(item.originalPrice || item.price) * qty;
+  });
 
-    const discount = originalPrice - totalPrice;
-    const gst = totalPrice * 0.18;
-    const finalAmount = totalPrice + gst;
+  const discount = originalPrice - totalPrice;
+  const finalAmount = totalPrice; // 👈 direct total hi final hai
 
-    return { originalPrice, totalPrice, discount, gst, finalAmount };
-  };
+  return { originalPrice, totalPrice, discount, finalAmount };
+};
+
 
   // Basic validations
   const validateForm = () => {
@@ -348,7 +346,7 @@ const CheckoutPage = () => {
   if (!cart || cart.items.length === 0)
     return <div className="text-center py-20">Your cart is empty</div>;
 
-  const { originalPrice, totalPrice, discount, gst, finalAmount } =
+  const { originalPrice, totalPrice, discount, finalAmount } =
     calculateTotals();
 
   return (
@@ -434,12 +432,12 @@ const CheckoutPage = () => {
             <span>Subtotal</span>
             <span>₹{totalPrice.toLocaleString()}</span>
           </div>
-          <div className="flex justify-between text-sm">
+          {/* <div className="flex justify-between text-sm">
             <span>GST (18%)</span>
             <span>
               ₹{gst.toLocaleString(undefined, { maximumFractionDigits: 2 })}
             </span>
-          </div>
+          </div> */}
           <hr />
           <div className="flex justify-between font-bold text-lg">
             <span>Total</span>

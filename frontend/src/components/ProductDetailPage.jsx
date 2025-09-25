@@ -342,9 +342,9 @@ const ProductDetailPage = () => {
             {/* Check section */}
             {/* Delivery Check Section */}
             <div className="mt-10">
-              <h2 className="text-xl font-semibold mb-3">
+              {/* <h2 className="text-xl font-semibold mb-3">
                 Check Delivery Date
-              </h2>
+              </h2> */}
 
               {/* Input with button */}
               <div className="flex items-center rounded-md overflow-hidden border border-gray-300">
