@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import products from "../data/Products.json";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaCheckCircle, FaChevronDown, FaChevronUp, FaRegThumbsUp } from "react-icons/fa";
 import { useCart } from "../../context/CartContext"; // Import useCart
 
 const AccordionSection = ({ title, children, defaultOpen = false }) => {
@@ -26,6 +26,77 @@ const AccordionSection = ({ title, children, defaultOpen = false }) => {
     </div>
   );
 };
+const Stars = ({ value = 0 }) => {
+  const full = Math.floor(value);
+  const hasHalf = value - full >= 0.5;
+  const total = 5;
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: total }).map((_, i) => {
+        const fill =
+          i < full ? "text-yellow-500" : hasHalf && i === full ? "text-yellow-400" : "text-gray-300";
+        const char = i < full ? "★" : hasHalf && i === full ? "★" : "★";
+        return (
+          <span key={i} className={`text-[18px] ${fill}`} aria-hidden>
+            {char}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+const ReviewCard = ({ r }) => {
+  const date = new Date(r.date);
+  const formatted = isNaN(date)
+  ? r.date
+  : date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short", // "short" = Sep, "long" = September
+      year: "numeric",
+    });
+  return (
+    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+      <div className="flex items-center justify-between">
+        <Stars value={r.rating} />
+      </div>
+
+      <h4 className="text-[16px] font-semibold text-gray-900 mt-2">{r.title}</h4>
+      <p className="text-sm text-gray-700 mt-1">{r.body}</p>
+
+      {/* optional review image */}
+      {Array.isArray(r.images) && r.images.length > 0 && (
+        <img
+          src={r.images[0]}
+          alt="review"
+          className="mt-3 w-16 h-16 object-cover rounded-md border"
+        />
+      )}
+
+      <div className="mt-4 flex items-center justify-between text-sm">
+        <div className="flex items-center gap-2">
+          <span className="font-medium text-gray-900">{r.authorName}</span>
+          {r.verifiedBuyer && (
+            <span className="inline-flex items-center gap-1 text-green-600">
+              <FaCheckCircle className="w-3.5 h-3.5" />
+              <span className="text-gray-600">Verified buyer</span>
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-2 flex items-center justify-between text-xs text-gray-600">
+        <span>From {r.source || "Tira"}</span>
+        <span>{formatted}</span>
+      </div>
+
+      <div className="mt-3 flex items-center gap-1 text-gray-700">
+        <FaRegThumbsUp className="w-4 h-4" />
+        <span className="text-sm">{r.likes || 0}</span>
+      </div>
+    </div>
+  );
+};
 
 const ProductDetailPage = () => {
   const { slug } = useParams();
@@ -33,6 +104,10 @@ const ProductDetailPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
   const { addToCart } = useCart(); // Use cart context
+  const [ratingFilter, setRatingFilter] = useState("ALL"); // "ALL" | 5 | 4 | 3 | 2 | 1
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [withImageOnly, setWithImageOnly] = useState(false);
+
 
   useEffect(() => {
     const found = products.find((p) => p.slug === slug);
@@ -47,6 +122,21 @@ const ProductDetailPage = () => {
       <p className="text-center mt-10 text-gray-600">Product not found.</p>
     );
   }
+  const reviews = Array.isArray(product.reviews) ? product.reviews : [];
+  const filteredReviews = reviews.filter(r => {
+    const byRating = ratingFilter === "ALL" ? true : Math.floor(r.rating) === Number(ratingFilter);
+    const byVerified = verifiedOnly ? !!r.verifiedBuyer : true;
+    const byImage = withImageOnly ? Array.isArray(r.images) && r.images.length > 0 : true;
+    return byRating && byVerified && byImage;
+  });
+
+  const computedAvg =
+    reviews.length > 0
+      ? Math.round((reviews.reduce((s, r) => s + (r.rating || 0), 0) / reviews.length) * 10) / 10
+      : 0;
+
+  const showRating = product.rating || computedAvg || 0;
+  const showCount = product.reviewCount || reviews.length || 0;
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
@@ -67,7 +157,7 @@ const ProductDetailPage = () => {
     try {
       // Use context addToCart
       await addToCart({ ...product, quantity: 1 });
-      
+
       navigate("/checkout", {
         state: {
           directBuy: true,
@@ -83,8 +173,6 @@ const ProductDetailPage = () => {
     }
   };
 
-  const dummyRating = 4.8;
-  const dummyReviewCount = 87;
   const items = [
     {
       icon: "/icons/Genuine.svg",
@@ -117,11 +205,10 @@ const ProductDetailPage = () => {
                       src={img}
                       alt={`thumb-${index}`}
                       onClick={() => setSelectedImage(img)}
-                      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
-                        selectedImage === img
-                          ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
-                          : "border-gray-300 hover:border-yellow-400"
-                      }`}
+                      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${selectedImage === img
+                        ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
+                        : "border-gray-300 hover:border-yellow-400"
+                        }`}
                     />
                   )
                 )}
@@ -155,11 +242,10 @@ const ProductDetailPage = () => {
                       src={img}
                       alt={`thumb-${index}`}
                       onClick={() => setSelectedImage(img)}
-                      className={`w-16 h-16 object-cover cursor-pointer border-2 transition-all duration-300 flex-shrink-0 ${
-                        selectedImage === img
-                          ? "border-yellow-600 shadow-md"
-                          : "border-gray-300"
-                      }`}
+                      className={`w-16 h-16 object-cover cursor-pointer border-2 transition-all duration-300 flex-shrink-0 ${selectedImage === img
+                        ? "border-yellow-600 shadow-md"
+                        : "border-gray-300"
+                        }`}
                     />
                   )
                 )}
@@ -178,15 +264,12 @@ const ProductDetailPage = () => {
               <div className="flex items-center gap-3 text-sm">
                 <div className="flex items-center gap-1">
                   <span className="text-yellow-500 text-lg">★</span>
-                  <span className="font-semibold text-gray-900">
-                    {product.rating || dummyRating}
-                  </span>
+                  <span className="font-semibold text-gray-900">{showRating}</span>
                 </div>
                 <span className="text-gray-400">|</span>
-                <span className="text-gray-600">
-                  ({product.reviewCount || dummyReviewCount} Reviews)
-                </span>
+                <span className="text-gray-600">({showCount} Reviews)</span>
               </div>
+
             </div>
 
             {/* Pricing */}
@@ -207,7 +290,7 @@ const ProductDetailPage = () => {
                 )}
               </div>
             </div>
-            
+
             {/* discount */}
             <div className="bg-blue-100 text-sm rounded-md px-4 py-3 mt-4 flex items-center justify-between gap-4">
               <span className="font-medium text-gray-800">
@@ -239,7 +322,7 @@ const ProductDetailPage = () => {
                 {product.description}
               </p>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="flex gap-4 pt-4">
               <button
@@ -324,11 +407,11 @@ const ProductDetailPage = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className=" border-dashed border-4 p-4 rounded-xl border-orange-600">
-                <p className="text-sm leading-relaxed">{product.thought}</p>
+              <p className="text-sm leading-relaxed">{product.thought}</p>
             </div>
-            
+
             {/* PRODUCT DETAILS ACCORDION STYLE SECTION */}
             <div className="mt-10">
               <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-2">
@@ -353,7 +436,7 @@ const ProductDetailPage = () => {
                   </ul>
                 </AccordionSection>
               )}
-              
+
               {/* benefits */}
               {product.benefits && (
                 <AccordionSection
@@ -370,8 +453,8 @@ const ProductDetailPage = () => {
                   </ul>
                 </AccordionSection>
               )}
-              
-              {/* how to use */} 
+
+              {/* how to use */}
               {product.howtouse && (
                 <AccordionSection title="How to Use" defaultOpen={false}>
                   <ul className="space-y-3 text-sm">
@@ -396,6 +479,72 @@ const ProductDetailPage = () => {
             </div>
           </div>
         </div>
+        {/* REVIEWS SECTION */}
+        {reviews.length > 0 && (
+          <div className="mt-14">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-900">Customer Reviews</h2>
+              <button
+                onClick={() => {
+                  setRatingFilter("ALL");
+                  setVerifiedOnly(false);
+                  setWithImageOnly(false);
+                }}
+                className="text-red-600 text-sm font-semibold hover:underline"
+              >
+                Reset filters
+              </button>
+            </div>
+
+            {/* Filters row */}
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              {/* Ratings dropdown-like chip row */}
+              <div className="flex items-center gap-2">
+                {["ALL", 5, 4, 3, 2, 1].map(opt => (
+                  <button
+                    key={opt}
+                    onClick={() => setRatingFilter(opt)}
+                    className={`px-3 py-1.5 rounded-full border text-sm ${ratingFilter === opt
+                      ? "bg-gray-900 text-white border-gray-900"
+                      : "bg-white text-gray-800 border-gray-300 hover:border-gray-400"
+                      }`}
+                  >
+                    {opt === "ALL" ? "All ratings" : `${opt} ★`}
+                  </button>
+                ))}
+              </div>
+
+              {/* Reviews By: Verified buyers toggle */}
+              <button
+                onClick={() => setVerifiedOnly(v => !v)}
+                className={`px-3 py-1.5 rounded-full border text-sm ${verifiedOnly
+                  ? "bg-gray-900 text-white border-gray-900"
+                  : "bg-white text-gray-800 border-gray-300 hover:border-gray-400"
+                  }`}
+              >
+                Reviews by: {verifiedOnly ? "Verified buyers" : "Everyone"}
+              </button>
+
+              {/* With image */}
+              <button
+                onClick={() => setWithImageOnly(v => !v)}
+                className={`px-3 py-1.5 rounded-full border text-sm ${withImageOnly
+                  ? "bg-gray-900 text-white border-gray-900"
+                  : "bg-white text-gray-800 border-gray-300 hover:border-gray-400"
+                  }`}
+              >
+                Reviews with image
+              </button>
+            </div>
+
+            {/* Cards grid */}
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {filteredReviews.map(r => (
+                <ReviewCard key={r.id} r={r} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Bottom Section */}
         {product.bottomSection && (
