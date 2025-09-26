@@ -14,18 +14,14 @@ import {
 } from "antd";
 import {
   Gauge,
-  Newspaper,
-  PhoneCall,
   ChevronDown,
   Package,
-  Settings,
   LogOut,
   User,
-  Sliders,
+  Save,
 } from "lucide-react";
 import { UserOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import axios from "axios";
-
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 const { SubMenu } = Menu;
@@ -110,15 +106,15 @@ useEffect(() => {
     label: "Orders",
     onClick: () => navigate("/admin/dashboard/orders"),
   },
-    {
-      key: "/admin/dashboard/contact-enquiry",
-      icon: <PhoneCall size={18} />,
-      label: "Contact Enquiry",
-      onClick: () => navigate("/admin/dashboard/contact-enquiry"),
-    },
+    // {
+    //   key: "/admin/dashboard/contact-enquiry",
+    //   icon: <PhoneCall size={18} />,
+    //   label: "Contact Enquiry",
+    //   onClick: () => navigate("/admin/dashboard/contact-enquiry"),
+    // },
     {
       key: "/admin/dashboard/drafts",
-      icon: <PhoneCall size={18} />,
+      icon: <Save size={18} />,
       label: "Draft page",
       onClick: () => navigate("/admin/dashboard/drafts"),
     },

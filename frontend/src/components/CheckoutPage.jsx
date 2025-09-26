@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { FaTruck, FaLock } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -19,6 +19,15 @@ const loadRazorpayScript = () => {
 const fpOf = (items = []) =>
   JSON.stringify(items.map(i => ({ id: i.slug || i.productId, q: Number(i.quantity || 1) })));
 
+// NEW: debounce function for auto-save
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(null, args), delay);
+  };
+};
+
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,16 +35,13 @@ const CheckoutPage = () => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // tiny UX sugar for Save button
-  const [justSaved, setJustSaved] = useState(false);
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
   // draft + UI states
   const [draftId, setDraftId] = useState(
     () => location.state?.resumeDraftId || localStorage.getItem("draftId") || null
   );
   const [saving, setSaving] = useState(false);
   const [paying, setPaying] = useState(false);
+  const [autoSaveStatus, setAutoSaveStatus] = useState(""); // "saving", "saved", "error"
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -44,6 +50,10 @@ const CheckoutPage = () => {
     pincode: "",
     address: "",
   });
+
+  // NEW: track form validity for auto-save
+  const [isFormValid, setIsFormValid] = useState(false);
+  const formValidRef = useRef(false);
 
   const fetchCart = async () => {
     try {
@@ -86,6 +96,17 @@ const CheckoutPage = () => {
     }
   }, [loading, cart, draftId]);
 
+  // NEW: validate form whenever formData changes
+  useEffect(() => {
+    const { fullName, email, phone, pincode, address } = formData;
+    const valid = fullName && email && phone && pincode && address &&
+      /^\d{6}$/.test(pincode) &&
+      /^\d{10}$/.test(phone);
+
+    setIsFormValid(valid);
+    formValidRef.current = valid;
+  }, [formData]);
+
   const handleInputChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -93,57 +114,39 @@ const CheckoutPage = () => {
     }));
   };
 
-const calculateTotals = () => {
-  if (!cart || !cart.items)
-    return {
-      originalPrice: 0,
-      totalPrice: 0,
-      discount: 0,
-      finalAmount: 0,
-    };
+  const calculateTotals = () => {
+    if (!cart || !cart.items)
+      return {
+        originalPrice: 0,
+        totalPrice: 0,
+        discount: 0,
+        finalAmount: 0,
+      };
 
-  let totalPrice = 0;
-  let originalPrice = 0;
+    let totalPrice = 0;
+    let originalPrice = 0;
 
-  cart.items.forEach((item) => {
-    const qty = Number(item.quantity || 1);
-    totalPrice += Number(item.price) * qty;
-    originalPrice += Number(item.originalPrice || item.price) * qty;
-  });
+    cart.items.forEach((item) => {
+      const qty = Number(item.quantity || 1);
+      totalPrice += Number(item.price) * qty;
+      originalPrice += Number(item.originalPrice || item.price) * qty;
+    });
 
-  const discount = originalPrice - totalPrice;
-  const finalAmount = totalPrice; // 👈 direct total hi final hai
+    const discount = originalPrice - totalPrice;
+    const finalAmount = totalPrice;
 
-  return { originalPrice, totalPrice, discount, finalAmount };
-};
-
-
-  // Basic validations
-  const validateForm = () => {
-    const { fullName, email, phone, pincode, address } = formData;
-    if (!fullName || !email || !phone || !pincode || !address)
-      return "Please fill all address fields";
-    if (!/^\d{6}$/.test(pincode)) return "Pincode must be 6 digits";
-    if (!/^\d{10}$/.test(phone)) return "Phone must be 10 digits";
-    return null;
+    return { originalPrice, totalPrice, discount, finalAmount };
   };
 
-  // STEP 1: Save details to backend and get draftId
-  const saveDetails = async () => {
-    const err = validateForm();
-    if (err) {
-      alert(err);
-      return;
-    }
-    if (!cart?.items?.length) {
-      alert("Your cart is empty");
-      return;
-    }
+  // NEW: Auto-save function with debouncing
+  const autoSaveDetails = debounce(async () => {
+    if (!formValidRef.current || !cart?.items?.length) return;
+    if (saving) return;
 
     setSaving(true);
-    const started = performance.now();
+    setAutoSaveStatus("saving");
+
     try {
-      // server pricing karega; identity + qty bhejo
       const payloadItems = cart.items.map((i) => ({
         productId: i.productId,
         slug: i.slug,
@@ -166,27 +169,31 @@ const calculateTotals = () => {
       if (res.data?.draftId) {
         setDraftId(res.data.draftId);
         localStorage.setItem("draftId", res.data.draftId);
+        setAutoSaveStatus("saved");
+
+        // Reset status after 2 seconds
+        setTimeout(() => setAutoSaveStatus(""), 2000);
       }
-
-      // ensure spinner min 1s visible
-      const elapsed = performance.now() - started;
-      if (elapsed < 1000) await sleep(1000 - elapsed);
-
-      // brief success feedback
-      setJustSaved(true);
-      setTimeout(() => setJustSaved(false), 1200);
     } catch (e) {
       console.error(e);
-      alert(e.response?.data?.message || "Failed to save details");
+      setAutoSaveStatus("error");
+      setTimeout(() => setAutoSaveStatus(""), 3000);
     } finally {
       setSaving(false);
     }
-  };
+  }, 1000); // 1 second debounce
+
+  // NEW: Trigger auto-save when form becomes valid or form data changes
+  useEffect(() => {
+    if (isFormValid && cart?.items?.length) {
+      autoSaveDetails();
+    }
+  }, [formData, isFormValid, cart, autoSaveDetails]);
 
   // STEP 2A: Pay via Razorpay (prepaid)
   const handlePay = async () => {
     if (!draftId) {
-      alert("Please save your details first");
+      alert("Please wait while we save your details...");
       return;
     }
 
@@ -198,7 +205,6 @@ const calculateTotals = () => {
 
     setPaying(true);
     try {
-      // Server computes amount for the draft
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/payment/create-order`,
         { draftId }
@@ -211,7 +217,7 @@ const calculateTotals = () => {
       const cartId = getCartId();
 
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // never hardcode
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: String(razorpayOrder.amount),
         currency: razorpayOrder.currency || "INR",
         name: "Petal Pure Oasis",
@@ -237,7 +243,6 @@ const calculateTotals = () => {
             );
 
             if (verificationRes.data?.success) {
-              // clear server cart
               try {
                 await axios.post(
                   `${import.meta.env.VITE_API_URL}/api/cart/clear`,
@@ -247,7 +252,6 @@ const calculateTotals = () => {
                 console.warn("Failed to clear cart:", clearError?.response?.data || clearError.message);
               }
 
-              // local cleanup + broadcast
               setCart({ items: [] });
               localStorage.removeItem("draftId");
               localStorage.setItem("cart:refresh", String(Date.now()));
@@ -293,10 +297,10 @@ const calculateTotals = () => {
     }
   };
 
-  // NEW STEP 2B: Cash on Delivery
+  // STEP 2B: Cash on Delivery
   const handleCOD = async () => {
     if (!draftId) {
-      alert("Please save your details first");
+      alert("Please wait while we save your details...");
       return;
     }
     if (saving || paying) return;
@@ -310,14 +314,12 @@ const calculateTotals = () => {
 
       if (data?.success) {
         const cartId = getCartId();
-        // clear server cart (best-effort)
         try {
           await axios.post(`${import.meta.env.VITE_API_URL}/api/cart/clear`, { cartId });
         } catch (e) {
           console.warn("cart clear failed (COD):", e?.response?.data || e.message);
         }
 
-        // local cleanup + broadcast
         setCart({ items: [] });
         localStorage.removeItem("draftId");
         localStorage.setItem("cart:refresh", String(Date.now()));
@@ -326,7 +328,7 @@ const calculateTotals = () => {
         navigate("/success", {
           state: {
             orderId: data.orderId,
-            amount: finalAmount,   // UI display only
+            amount: finalAmount,
             items: cart.items,
             method: "cod",
           },
@@ -389,14 +391,22 @@ const calculateTotals = () => {
             <div className="flex items-center text-sm text-gray-600">
               <FaTruck className="mr-2" /> Delivery within 3–7 days across India
             </div>
-            {draftId && (
-              <div className="mt-3 text-xs text-green-700">
-                Details saved. You can proceed to payment.
-              </div>
-            )}
-            {justSaved && (
-              <div className="mt-2 text-xs text-green-600">Saved ✓</div>
-            )}
+
+            {/* NEW: Auto-save status indicator */}
+            <div className="mt-3 text-xs">
+              {autoSaveStatus === "saving" && (
+                <span className="text-blue-600">Saving your details...</span>
+              )}
+              {autoSaveStatus === "saved" && (
+                <span className="text-green-600">✓ Details saved automatically</span>
+              )}
+              {autoSaveStatus === "error" && (
+                <span className="text-red-600">Failed to save. Please check your connection.</span>
+              )}
+              {draftId && !autoSaveStatus && (
+                <span className="text-green-700">Details saved. You can proceed to payment.</span>
+              )}
+            </div>
           </div>
 
           <div className="bg-white p-6 rounded shadow">
@@ -432,12 +442,6 @@ const calculateTotals = () => {
             <span>Subtotal</span>
             <span>₹{totalPrice.toLocaleString()}</span>
           </div>
-          {/* <div className="flex justify-between text-sm">
-            <span>GST (18%)</span>
-            <span>
-              ₹{gst.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-            </span>
-          </div> */}
           <hr />
           <div className="flex justify-between font-bold text-lg">
             <span>Total</span>
@@ -449,30 +453,38 @@ const calculateTotals = () => {
             </span>
           </div>
 
-          {/* Step buttons */}
-          <button
-            onClick={saveDetails}
-            disabled={saving}
-            className="w-full bg-white border text-black py-3 mt-2 rounded hover:bg-gray-50 transition disabled:opacity-60"
-          >
-            {saving ? "Saving..." : justSaved ? "Saved ✓" : "Save & Continue"}
-          </button>
+          {/* REMOVED: Save & Continue button */}
 
-          {/* NEW: COD button */}
+          {/* COD button - only enabled when draft is saved */}
           <button
             onClick={handleCOD}
             disabled={!draftId || saving || paying}
             className="w-full bg-white border text-black py-3 mt-2 rounded hover:bg-gray-50 transition disabled:opacity-60"
           >
-            Cash on Delivery
+            {!draftId ? "Please fill details first" : "Cash on Delivery"}
           </button>
 
+          {/* Pay button - only enabled when draft is saved */}
           <button
             onClick={handlePay}
             disabled={!draftId || paying}
-            className="w-full bg-black text-white py-3 mt-2 rounded disabled:opacity-60 hover:bg-gray-800 transition"
+            className="w-full bg-black text-white py-3 mt-2 rounded disabled:opacity-60 hover:bg-gray-800 transition flex items-center justify-center gap-3"
           >
-            {paying ? "Processing..." : "Pay"}
+            {paying ? (
+              "Processing..."
+            ) : !draftId ? (
+              "Please fill details first"
+            ) : (
+              <>
+                <span>Pay</span>
+                <div className="flex items-center gap-1 border-l border-gray-400 pl-3">
+                  <img src="/icons/phonepe.png" alt="PhonePe" className="h-4 w-auto" />
+                  <img src="/icons/gpay.png" alt="GPay" className="h-4 w-auto" />
+                  <img src="/icons/paytm.png" alt="Paytm" className="h-4 w-auto" />
+                  <img src="/icons/amazon.png" alt="Amazon Pay" className="h-4 w-auto" />
+                </div>
+              </>
+            )}
           </button>
           <div className="text-xs text-center items-center justify-center text-gray-600">5% off on Prepaid</div>
 

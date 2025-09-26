@@ -49,8 +49,8 @@ const Stars = ({ value = 0 }) => {
 const ReviewCard = ({ r }) => {
   const date = new Date(r.date);
   const formatted = isNaN(date)
-  ? r.date
-  : date.toLocaleDateString("en-IN", {
+    ? r.date
+    : date.toLocaleDateString("en-IN", {
       day: "2-digit",
       month: "short", // "short" = Sep, "long" = September
       year: "numeric",
@@ -109,15 +109,15 @@ const ProductDetailPage = () => {
   const [withImageOnly, setWithImageOnly] = useState(false);
 
 
-useEffect(() => {
-  const found = products.find((p) => p.slug === slug);
-  if (found) {
-    setProduct(found);
-    setSelectedImage(
-      found.images && found.images.length > 0 ? found.images[0] : found.image
-    );
-  }
-}, [slug]);
+  useEffect(() => {
+    const found = products.find((p) => p.slug === slug);
+    if (found) {
+      setProduct(found);
+      setSelectedImage(
+        found.images && found.images.length > 0 ? found.images[0] : found.image
+      );
+    }
+  }, [slug]);
 
 
   if (!product) {
@@ -200,27 +200,29 @@ useEffect(() => {
             {/* Desktop Layout */}
             <div className="hidden lg:flex gap-6">
               {/* Thumbnail List */}
-{/* Thumbnail List */}
 <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
   {[
-    product.image,
+    product.fimage,
+    product.image, 
     product.backImage,
     // product.hoverImage,
+    ...(product.images || []),
     product.modelImage,
-    ...(product.images || []), // spread array properly
-  ].map((img, index) => (
-    <img
-      key={index}
-      src={img}
-      alt={`thumb-${index}`}
-      onClick={() => setSelectedImage(img)}
-      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
-        selectedImage === img
-          ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
-          : "border-gray-300 hover:border-yellow-400"
-      }`}
-    />
-  ))}
+  ]
+    .filter(img => img && img.trim() !== "") // Filter out empty/null images
+    .map((img, index) => (
+      <img
+        key={index}
+        src={img}
+        alt={`thumb-${index}`}
+        onClick={() => setSelectedImage(img)}
+        className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
+          selectedImage === img
+            ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
+            : "border-gray-300 hover:border-yellow-400"
+        }`}
+      />
+    ))}
 </div>
 
 
@@ -357,7 +359,7 @@ useEffect(() => {
               </h2> */}
 
               {/* Input with button */}
-              <div className="flex items-center rounded-md overflow-hidden border border-gray-300">
+              {/* <div className="flex items-center rounded-md overflow-hidden border border-gray-300">
                 <input
                   type="text"
                   placeholder="Enter Your city Pincode"
@@ -366,7 +368,7 @@ useEffect(() => {
                 <button className="bg-black text-white font-bold px-5 py-2 text-sm">
                   Check
                 </button>
-              </div>
+              </div> */}
 
               {/* Shipping & COD Info */}
               <div className="mt-6 space-y-4">
