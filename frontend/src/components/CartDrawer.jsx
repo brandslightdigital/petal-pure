@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // components/CartDrawer.jsx
 import React from 'react';
 import { useCart } from '../../context/CartContext';
@@ -12,33 +13,32 @@ const CartDrawer = () => {
 
   const calculateTotals = () => {
     if (!cart || !cart.items || cart.items.length === 0) {
-      return { totalPrice: 0, totalWithGst: 0, discount: 0, itemCount: 0 };
+      return { totalPrice: 0, originalPrice: 0, discount: 0, itemCount: 0 };
     }
     
-    let totalPrice = 0;
-    let originalPrice = 0;
+    let totalPrice = 0;     // subtotal actually charged
+    let originalPrice = 0;  // MRP total (for strike/discount display)
     let itemCount = 0;
     
     cart.items.forEach((item) => {
-      totalPrice += item.price * item.quantity;
-      originalPrice += item.originalPrice * item.quantity;
-      itemCount += item.quantity;
-    });
+      const qty = Number(item.quantity || 1);
+      const price = Number(item.price || 0);
+      const mrp   = Number((item.originalPrice ?? item.price) || 0);
 
-    const gstAmount = totalPrice * 0.18;
-    const totalWithGst = totalPrice + gstAmount;
+      totalPrice   += price * qty;
+      originalPrice += mrp * qty;
+      itemCount    += qty;
+    });
 
     return {
       totalPrice,
       originalPrice,
-      discount: originalPrice - totalPrice,
-      gstAmount,
-      totalWithGst,
+      discount: Math.max(0, originalPrice - totalPrice),
       itemCount
     };
   };
 
-  const { totalWithGst, discount, itemCount } = calculateTotals();
+  const { totalPrice, originalPrice, discount, itemCount } = calculateTotals();
 
   const handleCheckout = () => {
     closeCart();
@@ -90,6 +90,7 @@ const CartDrawer = () => {
                     src={item.image} 
                     alt={item.name}
                     className="w-20 h-20 object-cover rounded"
+                    onError={(e) => { e.currentTarget.src = '/default-product.jpg'; }}
                   />
                   
                   <div className="flex-1 min-w-0">
@@ -98,25 +99,25 @@ const CartDrawer = () => {
                     </h3>
                     
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="font-bold text-gray-900">₹{item.price}</span>
-                      {item.originalPrice > item.price && (
+                      <span className="font-bold text-gray-900">₹{Number(item.price || 0).toLocaleString('en-IN')}</span>
+                      {Number(item.originalPrice ?? item.price) > Number(item.price || 0) && (
                         <span className="text-gray-500 line-through text-sm">
-                          ₹{item.originalPrice}
+                          ₹{Number(item.originalPrice ?? item.price).toLocaleString('en-IN')}
                         </span>
                       )}
                     </div>
 
-                    {item.originalPrice > item.price && (
+                    {Number(item.originalPrice ?? item.price) > Number(item.price || 0) && (
                       <div className="text-green-600 text-xs font-medium mb-2">
-                        You save ₹{(item.originalPrice - item.price) * item.quantity}
+                        You save ₹{((Number(item.originalPrice ?? item.price) - Number(item.price || 0)) * Number(item.quantity || 1)).toLocaleString('en-IN')}
                       </div>
                     )}
                     
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <button 
-                          onClick={() => updateQuantity(item.slug, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
+                          onClick={() => updateQuantity(item.slug, Number(item.quantity || 1) - 1)}
+                          disabled={Number(item.quantity || 1) <= 1}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded disabled:opacity-50"
                         >
                           <FaMinus size={12} />
@@ -125,7 +126,7 @@ const CartDrawer = () => {
                         <span className="w-8 text-center font-medium">{item.quantity}</span>
                         
                         <button 
-                          onClick={() => updateQuantity(item.slug, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.slug, Number(item.quantity || 1) + 1)}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded"
                         >
                           <FaPlus size={12} />
@@ -148,14 +149,24 @@ const CartDrawer = () => {
 
         {/* Footer - Only show if cart has items */}
         {cart && cart.items && cart.items.length > 0 && (
-          <div className="border-t p-6 space-y-4">
-            {/* Total */}
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>Total Amount:</span>
-              <span>₹{totalWithGst.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+          <div className="border-t p-6 space-y-3">
+            {/* Totals */}
+            <div className="flex justify-between text-sm">
+              <span>Subtotal</span>
+              <span>₹{totalPrice.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+            </div>
+            {discount > 0 && (
+              <div className="flex justify-between text-sm text-green-600">
+                <span>Discount</span>
+                <span>-₹{discount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+              </div>
+            )}
+            <div className="flex justify-between items-center text-lg font-bold pt-2 border-t">
+              <span>Total Amount</span>
+              <span>₹{totalPrice.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
             </div>
             
-            {/* Savings */}
+            {/* Savings blurb */}
             {discount > 0 && (
               <div className="text-green-600 text-sm font-medium text-center">
                 You save ₹{discount.toLocaleString('en-IN')} on this order

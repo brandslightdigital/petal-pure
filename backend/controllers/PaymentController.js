@@ -19,9 +19,6 @@ try {
   process.exit(1);
 }
 
-/**
- * Build HTML email from server-trusted data
- */
 const generateOrderConfirmationEmail = ({ order, items, customer, totals, payment, paymentMethod = 'prepaid' }) => {
   const totalItems = items.reduce((sum, it) => sum + (Number(it.quantity) || 1), 0);
   const subtotal = items.reduce((sum, it) => sum + Number(it.price) * (Number(it.quantity) || 1), 0);
@@ -115,7 +112,6 @@ const generateOrderConfirmationEmail = ({ order, items, customer, totals, paymen
           <div class="price-breakdown">
             <div class="price-row"><span>Subtotal (${totalItems} items):</span><span>₹${subtotal.toFixed(2)}</span></div>
             ${savings > 0 ? `<div class="price-row" style="color:#28a745;"><span>Total Savings:</span><span>-₹${savings.toFixed(2)}</span></div>` : ''}
-            <div class="price-row"><span>GST (18%):</span><span>₹${Number(totals.gst).toFixed(2)}</span></div>
             <div class="price-row"><span>Shipping:</span><span>FREE</span></div>
             <div class="price-row total">
               <span>${isCOD ? 'Amount Due on Delivery:' : 'Total Paid:'}</span>
@@ -168,8 +164,7 @@ exports.createOrder = async (req, res) => {
 
     // Always recompute from server-trusted catalog
     const totals = computeTotals(draft.cartItems);
-    const amountPaise = Math.round(Number(totals.final) * 100);
-
+    const amountPaise = Math.trunc(totals.final * 100);
     if (!Number.isFinite(amountPaise) || amountPaise < 100) {
       return res.status(400).json({ success: false, message: 'Invalid computed amount' });
     }
@@ -261,7 +256,6 @@ exports.verifyPayment = async (req, res) => {
       totals: {
         originalPrice: totals.originalPrice,
         subtotal: totals.subtotal,
-        gst: totals.gst,
         discount: totals.discount,
         final: totals.final
       }
@@ -369,7 +363,6 @@ exports.placeCOD = async (req, res) => {
       totals: {
         originalPrice: totals.originalPrice,
         subtotal: totals.subtotal,
-        gst: totals.gst,
         discount: totals.discount,
         final: totals.final
       },
@@ -390,7 +383,7 @@ exports.placeCOD = async (req, res) => {
           service: 'gmail',
           auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
         });
-        const fakePayment = { amount: Math.round(Number(totals.final) * 100) };
+        const fakePayment = { amount: Math.trunc(Number(totals.final * 100)) };
         const html = generateOrderConfirmationEmail({
           order,
           items: totals.items,
@@ -405,7 +398,7 @@ exports.placeCOD = async (req, res) => {
           subject: `COD Order Placed #${order._id} - Petal Pure Oasis`,
           html
         });
-                // Admin notification
+        // Admin notification
         try {
           await transporter.sendMail({
             from: `"Petal Pure Oasis" <${process.env.MAIL_USER}>`,

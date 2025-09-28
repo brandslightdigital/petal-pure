@@ -7,7 +7,7 @@ const CartItemSchema = new mongoose.Schema(
     slug: { type: String },
     name: { type: String, required: true },
     price: { type: Number, required: true },          // unit price actually charged
-    originalPrice: { type: Number },                   // MRP or pre-discount
+    originalPrice: { type: Number },                  // MRP or pre-discount
     quantity: { type: Number, default: 1, min: 1 },
     image: { type: String },
   },
@@ -42,7 +42,7 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       enum: [
         'paid',           // prepaid success
-        'cod_placed',     // COD placed, to be collected on delivery
+        'cod_placed',     // cod_placed, to be collected on delivery
         'payment_failed', // gateway failed
         'shipped',
         'delivered',
@@ -52,14 +52,13 @@ const OrderSchema = new mongoose.Schema(
       set: v => (typeof v === 'string' ? v.toLowerCase() : v),
     },
 
-    // Grand total charged or due (GST etc. included)
+    // Grand total charged or due
     amount: { type: Number, required: true },
 
     // Optional breakdown (handy in admin)
     totals: {
       originalPrice: { type: Number },  // sum of MRP*qty
       subtotal: { type: Number },       // sum of price*qty
-      gst: { type: Number },
       discount: { type: Number },
       final: { type: Number },          // should match 'amount'
     },

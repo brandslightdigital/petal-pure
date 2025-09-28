@@ -17,8 +17,15 @@ exports.saveDetails = async (req, res) => {
         {
           customer: address,
           cartItems: totals.items,
-          totals: { originalPrice: totals.originalPrice, subtotal: totals.subtotal, gst: totals.gst, final: totals.final },
-          cartId, directBuy, status: 'details_submitted'
+          totals: { 
+            originalPrice: totals.originalPrice, 
+            subtotal: totals.subtotal, 
+            discount: totals.discount, 
+            final: totals.final 
+          },
+          cartId, 
+          directBuy, 
+          status: 'details_submitted'
         },
         { new: true }
       );
@@ -26,8 +33,14 @@ exports.saveDetails = async (req, res) => {
       draft = await Draft.create({
         customer: address,
         cartItems: totals.items,
-        totals: { originalPrice: totals.originalPrice, subtotal: totals.subtotal, gst: totals.gst, final: totals.final },
-        cartId, directBuy
+        totals: { 
+          originalPrice: totals.originalPrice, 
+          subtotal: totals.subtotal, 
+          discount: totals.discount, 
+          final: totals.final 
+        },
+        cartId, 
+        directBuy
       });
     }
 

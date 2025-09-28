@@ -26,6 +26,10 @@ export default function DraftDetail() {
 
   const totalItems = (draft.cartItems || []).reduce((s, it) => s + Number(it.quantity || 1), 0);
 
+  const fmt = (n) => Number(n ?? 0).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+  const totals = draft.totals || {};
+  const showDiscount = Number(totals.discount ?? (totals.originalPrice - totals.subtotal)) > 0;
+
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Draft #{draft._id}</h1>
@@ -34,21 +38,37 @@ export default function DraftDetail() {
         <div className="md:col-span-2 bg-white rounded shadow p-4">
           <h2 className="font-semibold mb-3">Items ({totalItems})</h2>
           <div className="divide-y">
-            {(draft.cartItems || []).map((it, idx) => (
-              <div key={idx} className="py-3 flex items-center gap-4">
-                <img src={it.image} alt={it.name} className="w-16 h-16 object-cover rounded border" />
-                <div className="flex-1">
-                  <div className="font-medium">{it.name}</div>
-                  <div className="text-sm text-gray-600">Qty: {it.quantity}</div>
-                </div>
-                <div className="text-right">
-                  <div>₹{Number(it.price).toLocaleString()}</div>
-                  <div className="text-xs text-gray-500">
-                    Total: ₹{(Number(it.price) * Number(it.quantity)).toLocaleString()}
+            {(draft.cartItems || []).map((it, idx) => {
+              const qty = Number(it.quantity || 1);
+              const price = Number(it.price || 0);
+              const mrp = Number(it.originalPrice ?? it.price ?? 0);
+              const hasDiscount = mrp > price;
+              return (
+                <div key={idx} className="py-3 flex items-center gap-4">
+                  <img
+                    src={it.image || "/default-product.jpg"}
+                    alt={it.name}
+                    className="w-16 h-16 object-cover rounded border"
+                    onError={(e) => { e.currentTarget.src = "/default-product.jpg"; }}
+                  />
+                  <div className="flex-1">
+                    <div className="font-medium">{it.name}</div>
+                    <div className="text-sm text-gray-600">Qty: {qty}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="flex items-center gap-2 justify-end">
+                      {hasDiscount && (
+                        <span className="text-xs text-gray-500 line-through">₹{fmt(mrp)}</span>
+                      )}
+                      <span>₹{fmt(price)}</span>
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      Total: ₹{fmt(price * qty)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -63,18 +83,26 @@ export default function DraftDetail() {
           </div>
 
           <h2 className="font-semibold mt-4 mb-2">Summary</h2>
-          <div className="text-sm">
+          <div className="text-sm space-y-1">
+            {totals.originalPrice != null && (
+              <div className="flex justify-between">
+                <span>MRP Total</span>
+                <span>₹{fmt(totals.originalPrice)}</span>
+              </div>
+            )}
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>₹{Number(draft.totals?.subtotal ?? 0).toLocaleString()}</span>
+              <span>₹{fmt(totals.subtotal)}</span>
             </div>
-            <div className="flex justify-between">
-              <span>GST</span>
-              <span>₹{Number(draft.totals?.gst ?? 0).toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between font-semibold">
+            {showDiscount && (
+              <div className="flex justify-between text-green-600">
+                <span>Discount</span>
+                <span>-₹{fmt(totals.discount ?? (totals.originalPrice - totals.subtotal))}</span>
+              </div>
+            )}
+            <div className="flex justify-between font-semibold pt-1 border-t">
               <span>Final</span>
-              <span>₹{Number(draft.totals?.final ?? 0).toLocaleString()}</span>
+              <span>₹{fmt(totals.final)}</span>
             </div>
           </div>
 
