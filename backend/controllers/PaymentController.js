@@ -90,9 +90,8 @@ const generateOrderConfirmationEmail = ({ order, items, customer, totals, paymen
               <span class="info-label">Payment ID:</span>
               <span class="info-value">${!isCOD ? (order.razorpay_payment_id || '—') : '—'}</span>
             </div>
-            <div class="info-row"><span class="info-label">Order Date:</span><span class="info-value">${
-              new Date(order.createdAt || Date.now()).toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})
-            }</span></div>
+            <div class="info-row"><span class="info-label">Order Date:</span><span class="info-value">${new Date(order.createdAt || Date.now()).toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    }</span></div>
             <div class="info-row"><span class="info-label">Status:</span><span class="info-value"><span class="status-badge">${order.status || (isCOD ? 'cod_placed' : 'paid')}</span></span></div>
           </div>
 
@@ -120,7 +119,7 @@ const generateOrderConfirmationEmail = ({ order, items, customer, totals, paymen
             <div class="price-row"><span>Shipping:</span><span>FREE</span></div>
             <div class="price-row total">
               <span>${isCOD ? 'Amount Due on Delivery:' : 'Total Paid:'}</span>
-              <span>₹${(payment.amount/100).toFixed(2)}</span>
+              <span>₹${(payment.amount / 100).toFixed(2)}</span>
             </div>
           </div>
 
@@ -288,12 +287,27 @@ exports.verifyPayment = async (req, res) => {
           paymentMethod: 'prepaid'
         });
 
+        // Customer mail
         await transporter.sendMail({
           from: `"Petal Pure Oasis" <${process.env.MAIL_USER}>`,
           to: customer.email,
           subject: `Order Confirmation #${order._id} - Petal Pure Oasis`,
           html
         });
+
+        // Admin notification
+        try {
+          await transporter.sendMail({
+            from: `"Petal Pure Oasis" <${process.env.MAIL_USER}>`,
+            to: "petalpureoasisorder@gmail.com",
+            subject: `New Order Received #${order._id}`,
+            html
+          });
+          console.log("Admin mail sent ✅");
+        } catch (err) {
+          console.error("Admin mail failed ❌", err);
+        }
+
       } catch (emailError) {
         console.error('Email sending failed:', emailError);
       }
@@ -309,7 +323,7 @@ exports.verifyPayment = async (req, res) => {
     console.error('Verification error:', error);
     try {
       if (req.body?.draftId) await Draft.findByIdAndUpdate(req.body.draftId, { status: 'payment_failed' });
-    } catch {}
+    } catch { }
     res.status(500).json({
       success: false,
       message: error?.error?.description || 'Payment verification failed'
@@ -329,13 +343,13 @@ exports.placeCOD = async (req, res) => {
     if (draftId) {
       const draft = await Draft.findById(draftId);
       if (!draft || !draft.cartItems?.length) {
-        return res.status(404).json({ success:false, message:'Draft not found or empty' });
+        return res.status(404).json({ success: false, message: 'Draft not found or empty' });
       }
       customer = draft.customer;
       itemsInput = draft.cartItems;
     } else {
       if (!cart?.items?.length || !address) {
-        return res.status(400).json({ success:false, message:'Missing cart/address' });
+        return res.status(400).json({ success: false, message: 'Missing cart/address' });
       }
       customer = address;
       itemsInput = cart.items;
@@ -391,6 +405,18 @@ exports.placeCOD = async (req, res) => {
           subject: `COD Order Placed #${order._id} - Petal Pure Oasis`,
           html
         });
+                // Admin notification
+        try {
+          await transporter.sendMail({
+            from: `"Petal Pure Oasis" <${process.env.MAIL_USER}>`,
+            to: "petalpureoasisorder@gmail.com",
+            subject: `New Order Received #${order._id}`,
+            html
+          });
+          console.log("Admin mail sent ✅");
+        } catch (err) {
+          console.error("Admin mail failed ❌", err);
+        }
       } catch (emailErr) {
         console.error('Email COD failed:', emailErr);
       }
@@ -399,7 +425,7 @@ exports.placeCOD = async (req, res) => {
     return res.json({ success: true, orderId: order._id });
   } catch (err) {
     console.error('placeCOD error:', err);
-    return res.status(500).json({ success:false, message:'Failed to place COD order' });
+    return res.status(500).json({ success: false, message: 'Failed to place COD order' });
   }
 };
 

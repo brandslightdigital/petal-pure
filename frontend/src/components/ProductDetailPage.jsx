@@ -200,30 +200,29 @@ const ProductDetailPage = () => {
             {/* Desktop Layout */}
             <div className="hidden lg:flex gap-6">
               {/* Thumbnail List */}
-<div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
-  {[
-    product.fimage,
-    product.image, 
-    product.backImage,
-    // product.hoverImage,
-    ...(product.images || []),
-    product.modelImage,
-  ]
-    .filter(img => img && img.trim() !== "") // Filter out empty/null images
-    .map((img, index) => (
-      <img
-        key={index}
-        src={img}
-        alt={`thumb-${index}`}
-        onClick={() => setSelectedImage(img)}
-        className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
-          selectedImage === img
-            ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
-            : "border-gray-300 hover:border-yellow-400"
-        }`}
-      />
-    ))}
-</div>
+              <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto">
+                {[
+                  product.fimage,
+                  product.image,
+                  product.backImage,
+                  // product.hoverImage,
+                  ...(product.images || []),
+                  product.modelImage,
+                ]
+                  .filter(img => img && img.trim() !== "") // Filter out empty/null images
+                  .map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`thumb-${index}`}
+                      onClick={() => setSelectedImage(img)}
+                      className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${selectedImage === img
+                          ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
+                          : "border-gray-300 hover:border-yellow-400"
+                        }`}
+                    />
+                  ))}
+              </div>
 
 
               {/* Main Image */}

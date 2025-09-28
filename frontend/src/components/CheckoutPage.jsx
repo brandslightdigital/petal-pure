@@ -15,18 +15,25 @@ const loadRazorpayScript = () => {
   });
 };
 
-// NEW: simple fingerprint for cart contents (slug/productId + qty)
+// simple fingerprint for cart contents (slug/productId + qty)
 const fpOf = (items = []) =>
-  JSON.stringify(items.map(i => ({ id: i.slug || i.productId, q: Number(i.quantity || 1) })));
+  JSON.stringify(
+    items.map((i) => ({ id: i.slug || i.productId, q: Number(i.quantity || 1) }))
+  );
 
-// NEW: debounce function for auto-save
-const debounce = (func, delay) => {
-  let timeoutId;
-  return (...args) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(null, args), delay);
+// cancel-able debounce
+const debounce = (fn, delay) => {
+  let t;
+  const debounced = (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
   };
+  debounced.cancel = () => clearTimeout(t);
+  return debounced;
 };
+
+// normalize helpers
+const digitsOnly = (s) => String(s || "").replace(/\D/g, "");
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -51,9 +58,35 @@ const CheckoutPage = () => {
     address: "",
   });
 
-  // NEW: track form validity for auto-save
+  // track form validity for auto-save
   const [isFormValid, setIsFormValid] = useState(false);
   const formValidRef = useRef(false);
+
+  // stable helpers/refs for autosave
+  const debouncedSaveRef = useRef(null);
+  const lastSavedHashRef = useRef("");
+
+  // keep latest values in refs to avoid stale closures
+  const latestFormRef = useRef(formData);
+  const latestCartRef = useRef(cart);
+  const latestDraftIdRef = useRef(draftId);
+
+  useEffect(() => {
+    latestFormRef.current = formData;
+  }, [formData]);
+  useEffect(() => {
+    latestCartRef.current = cart;
+  }, [cart]);
+  useEffect(() => {
+    latestDraftIdRef.current = draftId;
+  }, [draftId]);
+
+  // cart fingerprint for dependency + ref
+  const cartFp = cart?.items ? fpOf(cart.items) : "";
+  const latestCartFpRef = useRef(cartFp);
+  useEffect(() => {
+    latestCartFpRef.current = cartFp;
+  }, [cartFp]);
 
   const fetchCart = async () => {
     try {
@@ -83,7 +116,7 @@ const CheckoutPage = () => {
     }
   }, [location.state]);
 
-  // NEW: if cart changes vs last-save fingerprint, reset stale draft
+  // if cart changes vs last-save fingerprint, reset stale draft
   useEffect(() => {
     if (!loading && cart?.items) {
       const fp = fpOf(cart.items);
@@ -96,12 +129,18 @@ const CheckoutPage = () => {
     }
   }, [loading, cart, draftId]);
 
-  // NEW: validate form whenever formData changes
+  // validate form whenever formData changes (normalized)
   useEffect(() => {
     const { fullName, email, phone, pincode, address } = formData;
-    const valid = fullName && email && phone && pincode && address &&
-      /^\d{6}$/.test(pincode) &&
-      /^\d{10}$/.test(phone);
+
+    const phoneDigits = digitsOnly(phone);
+    const pincodeDigits = digitsOnly(pincode);
+
+    // keep email check light; presence is fine here
+    const valid =
+      Boolean(fullName && email && address) &&
+      phoneDigits.length === 10 &&
+      pincodeDigits.length === 6;
 
     setIsFormValid(valid);
     formValidRef.current = valid;
@@ -138,16 +177,31 @@ const CheckoutPage = () => {
     return { originalPrice, totalPrice, discount, finalAmount };
   };
 
-  // NEW: Auto-save function with debouncing
-  const autoSaveDetails = debounce(async () => {
-    if (!formValidRef.current || !cart?.items?.length) return;
+  // CORE: perform an auto-save only when there's a meaningful change
+  const autoSaveCore = async () => {
+    const currentForm = latestFormRef.current;
+    const currentCart = latestCartRef.current;
+    const currentDraftId = latestDraftIdRef.current;
+    const currentFp = latestCartFpRef.current;
+
+    if (!formValidRef.current || !currentCart?.items?.length) return;
     if (saving) return;
+
+    const nowHash = JSON.stringify({
+      addr: currentForm,
+      fp: currentFp,
+    });
+
+    if (nowHash === lastSavedHashRef.current) {
+      // nothing new to save; avoid re-hitting server
+      return;
+    }
 
     setSaving(true);
     setAutoSaveStatus("saving");
 
     try {
-      const payloadItems = cart.items.map((i) => ({
+      const payloadItems = currentCart.items.map((i) => ({
         productId: i.productId,
         slug: i.slug,
         name: i.name,
@@ -155,11 +209,17 @@ const CheckoutPage = () => {
         image: i.image,
       }));
 
+      const payloadAddress = {
+        ...currentForm,
+        phone: digitsOnly(currentForm.phone),
+        pincode: digitsOnly(currentForm.pincode),
+      };
+
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/checkout/details`,
         {
-          draftId,
-          address: formData,
+          draftId: currentDraftId,
+          address: payloadAddress,
           cart: { items: payloadItems },
           cartId: getCartId(),
           directBuy: !!location.state?.directBuy,
@@ -171,24 +231,42 @@ const CheckoutPage = () => {
         localStorage.setItem("draftId", res.data.draftId);
         setAutoSaveStatus("saved");
 
-        // Reset status after 2 seconds
-        setTimeout(() => setAutoSaveStatus(""), 2000);
+        // mark this version as saved so we don't re-save identical payloads
+        lastSavedHashRef.current = nowHash;
+
+        setTimeout(() => setAutoSaveStatus(""), 1500);
       }
     } catch (e) {
       console.error(e);
       setAutoSaveStatus("error");
-      setTimeout(() => setAutoSaveStatus(""), 3000);
+      setTimeout(() => setAutoSaveStatus(""), 2000);
     } finally {
       setSaving(false);
     }
-  }, 1000); // 1 second debounce
+  };
 
-  // NEW: Trigger auto-save when form becomes valid or form data changes
+  // create the debounced wrapper ONCE per mount, and clean up on unmount
+  useEffect(() => {
+    debouncedSaveRef.current = debounce(autoSaveCore, 900);
+    return () => {
+      debouncedSaveRef.current?.cancel?.();
+    };
+    // intentionally empty deps: we want a stable debounced instance
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // trigger auto-save only when inputs actually change
   useEffect(() => {
     if (isFormValid && cart?.items?.length) {
-      autoSaveDetails();
+      debouncedSaveRef.current?.();
     }
-  }, [formData, isFormValid, cart, autoSaveDetails]);
+    // depend on formData contents and cart fingerprint, not the entire cart object or debounced fn
+  }, [isFormValid, formData, cartFp, cart?.items?.length]);
+
+  // also try an immediate save when user leaves a field
+  const handleBlurSave = () => {
+    if (isFormValid && cart?.items?.length) autoSaveCore();
+  };
 
   // STEP 2A: Pay via Razorpay (prepaid)
   const handlePay = async () => {
@@ -348,8 +426,7 @@ const CheckoutPage = () => {
   if (!cart || cart.items.length === 0)
     return <div className="text-center py-20">Your cart is empty</div>;
 
-  const { originalPrice, totalPrice, discount, finalAmount } =
-    calculateTotals();
+  const { originalPrice, totalPrice, discount, finalAmount } = calculateTotals();
 
   return (
     <div className="min-h-screen bg-[#fffefc] px-4 py-10 max-w-6xl mx-auto">
@@ -362,19 +439,14 @@ const CheckoutPage = () => {
             {["fullName", "email", "phone", "pincode"].map((field, idx) => (
               <input
                 key={idx}
-                type={
-                  field === "email"
-                    ? "email"
-                    : field === "phone"
-                      ? "tel"
-                      : "text"
-                }
+                type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
                 name={field}
                 placeholder={field
                   .replace(/([A-Z])/g, " $1")
                   .replace(/^./, (str) => str.toUpperCase())}
                 value={formData[field]}
                 onChange={handleInputChange}
+                onBlur={handleBlurSave}
                 className="w-full mb-4 px-4 py-3 border rounded"
                 required
               />
@@ -385,6 +457,7 @@ const CheckoutPage = () => {
               placeholder="Full Address"
               value={formData.address}
               onChange={handleInputChange}
+              onBlur={handleBlurSave}
               className="w-full mb-4 px-4 py-3 border rounded"
               required
             />
@@ -392,7 +465,7 @@ const CheckoutPage = () => {
               <FaTruck className="mr-2" /> Delivery within 3–7 days across India
             </div>
 
-            {/* NEW: Auto-save status indicator */}
+            {/* Auto-save status indicator */}
             <div className="mt-3 text-xs">
               {autoSaveStatus === "saving" && (
                 <span className="text-blue-600">Saving your details...</span>
@@ -453,8 +526,6 @@ const CheckoutPage = () => {
             </span>
           </div>
 
-          {/* REMOVED: Save & Continue button */}
-
           {/* COD button - only enabled when draft is saved */}
           <button
             onClick={handleCOD}
@@ -486,7 +557,9 @@ const CheckoutPage = () => {
               </>
             )}
           </button>
-          <div className="text-xs text-center items-center justify-center text-gray-600">5% off on Prepaid</div>
+          <div className="text-xs text-center items-center justify-center text-gray-600">
+            5% off on Prepaid
+          </div>
 
           <div className="flex items-center justify-center text-gray-600 text-sm mt-2">
             <FaLock className="mr-2" />
