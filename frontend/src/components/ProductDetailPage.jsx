@@ -204,7 +204,7 @@ const ProductDetailPage = () => {
                 {[
                   product.fimage,
                   product.image,
-                  product.backImage,
+                  // product.backImage,
                   // product.hoverImage,
                   ...(product.images || []),
                   product.modelImage,
@@ -217,8 +217,8 @@ const ProductDetailPage = () => {
                       alt={`thumb-${index}`}
                       onClick={() => setSelectedImage(img)}
                       className={`w-20 h-20 object-cover cursor-pointer border-2 transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${selectedImage === img
-                          ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
-                          : "border-gray-300 hover:border-yellow-400"
+                        ? "border-yellow-600 shadow-md ring-2 ring-yellow-400 ring-opacity-50"
+                        : "border-gray-300 hover:border-yellow-400"
                         }`}
                     />
                   ))}
@@ -246,7 +246,7 @@ const ProductDetailPage = () => {
               </div>
 
               <div className="flex gap-3 justify-center overflow-x-auto pb-2">
-                {[product.image, product.backImage, product.modelImage].map(
+                {[product.image, product.modelImage, ...(product.images || []),].map(
                   (img, index) => (
                     <img
                       key={index}
