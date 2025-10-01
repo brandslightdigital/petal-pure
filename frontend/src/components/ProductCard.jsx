@@ -137,7 +137,7 @@ const ProductCard = ({ product }) => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 gap-1">
+            {/* <div className="grid grid-cols-1 gap-1">
               <button
                 onClick={handleAddToCart}
                 disabled={isAddingToCart}
@@ -148,7 +148,7 @@ const ProductCard = ({ product }) => {
                 <FaShoppingCart size={14} />
                 <span>{isAddingToCart ? "Adding..." : "Add To Cart"}</span>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

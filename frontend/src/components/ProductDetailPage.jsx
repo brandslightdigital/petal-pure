@@ -335,7 +335,7 @@ const ProductDetailPage = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4 pt-4">
+            {/* <div className="flex gap-4 pt-4">
               <button
                 onClick={handleAddToCart}
                 className="cursor-pointer bg-gradient-to-r from-gray-900 to-black text-white px-8 py-4 rounded-lg w-full hover:from-black hover:to-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-bold text-lg"
@@ -348,7 +348,7 @@ const ProductDetailPage = () => {
               >
                 Buy Now
               </button>
-            </div>
+            </div> */}
 
             {/* Check section */}
             {/* Delivery Check Section */}

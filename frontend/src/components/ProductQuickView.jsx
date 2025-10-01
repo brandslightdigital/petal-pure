@@ -154,7 +154,7 @@ const ProductQuickView = ({ onClose, product }) => {
                 </button>
               </div>
               
-              <div className="space-y-3">
+              {/* <div className="space-y-3">
                 <button
                   onClick={handleAddToCart}
                   className="w-full flex items-center justify-center gap-2 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-all duration-300 font-semibold text-lg"
@@ -169,7 +169,7 @@ const ProductQuickView = ({ onClose, product }) => {
                 >
                   Buy Now
                 </button>
-              </div>
+              </div> */}
 
               {/* Quick features */}
               <div className="mt-4 space-y-2 text-xs text-gray-600">
