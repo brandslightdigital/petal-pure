@@ -172,10 +172,10 @@ const Footer = () => {
               <div className="flex items-center">
                 <IoMdMail className="text-[#b8865b] mr-3" />
                 <a
-                  href="mailto:info@petalspure.com"
+                  href="mailto:petalpurecustomer@gmail.com"
                   className="hover:text-[#d8b278]"
                 >
-                  info@petalspure.com
+                  petalpurecustomer@gmail.com
                 </a>
               </div>
               <div className="flex items-center">
